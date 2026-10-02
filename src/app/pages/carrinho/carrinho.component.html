@@ -1,1 +1,117 @@
-<p>carrinho works!</p>
+<app-header />
+<section class="carrinho">
+  <header class="topo">
+    <h1>Seu carrinho</h1>
+    @if (itens().length) {
+      <p class="topo-info">
+        {{ totalGarrafas() }} {{ totalGarrafas() === 1 ? 'garrafa' : 'garrafas' }} reservadas
+      </p>
+    }
+  </header>
+
+  @if (pedidoConfirmado(); as pedido) {
+    <div class="aviso-central" role="status">
+      <h2>Pedido recebido</h2>
+      <p>
+        Total de {{ moeda(pedido.total) }} em {{ pedido.garrafas }}
+        {{ pedido.garrafas === 1 ? 'garrafa' : 'garrafas' }}. Nós avisamos quando o pedido sair da adega.
+      </p>
+      <button type="button" class="btn-principal" (click)="restaurarExemplo()">Montar novo carrinho</button>
+    </div>
+  } @else if (!itens().length) {
+    <div class="aviso-central">
+      <h2>Nenhuma garrafa por aqui</h2>
+      <p>Escolha rótulos no catálogo para começar o pedido.</p>
+      <button type="button" class="btn-secundario" (click)="restaurarExemplo()">Carregar exemplo</button>
+    </div>
+  } @else {
+    <div class="layout">
+      <ul class="lista">
+        @for (item of itens(); track item.id) {
+          <li class="item">
+            <img class="foto" [src]="item.imagem" [alt]="item.nome" />
+
+            <div class="detalhes">
+              <h2>{{ item.nome }}</h2>
+              <p class="produtor">{{ item.produtor }}</p>
+              <p class="origem">{{ item.origem }}</p>
+              <p class="etiquetas">
+                <span>{{ tipos[item.tipo] }}</span>
+              </p>
+            </div>
+
+            <div class="quantidade" role="group" [attr.aria-label]="'Quantidade de ' + item.nome">
+              <button type="button" (click)="alterarQuantidade(item.id, -1)" [disabled]="item.quantidade <= 1" aria-label="Diminuir quantidade">−</button>
+              <output>{{ item.quantidade }}</output>
+              <button type="button" (click)="alterarQuantidade(item.id, 1)" [disabled]="item.quantidade >= limitePorItem" aria-label="Aumentar quantidade">+</button>
+            </div>
+
+            <div class="valores">
+              <strong>{{ moeda(item.preco * item.quantidade) }}</strong>
+              @if (item.quantidade > 1) {
+                <span class="unitario">{{ moeda(item.preco) }} cada</span>
+              }
+              <button type="button" class="remover" (click)="remover(item.id)">Remover</button>
+            </div>
+          </li>
+        }
+      </ul>
+
+      <aside class="resumo" aria-label="Resumo do pedido">
+        <h2>Resumo do pedido</h2>
+
+        <div class="frete-progresso">
+          @if (faltaParaFreteGratis() > 0) {
+            <p>Faltam {{ moeda(faltaParaFreteGratis()) }} para o frete grátis.</p>
+          } @else {
+            <p>Frete grátis aplicado.</p>
+          }
+          <div class="barra"><div class="barra-cheia" [style.width.%]="progressoFrete()"></div></div>
+        </div>
+
+        <dl class="linhas">
+          <div><dt>Subtotal</dt><dd>{{ moeda(subtotal()) }}</dd></div>
+          @if (cupomAplicado(); as codigo) {
+            <div class="desconto">
+              <dt>Cupom {{ codigo }} ({{ percentualCupom() }}%)</dt>
+              <dd>− {{ moeda(desconto()) }}</dd>
+            </div>
+          }
+          <div><dt>Frete</dt><dd>{{ frete() === 0 ? 'Grátis' : moeda(frete()) }}</dd></div>
+          <div class="total"><dt>Total</dt><dd>{{ moeda(total()) }}</dd></div>
+        </dl>
+
+        <div class="cupom">
+          @if (cupomAplicado()) {
+            <button type="button" class="link" (click)="removerCupom()">Remover cupom</button>
+          } @else {
+            <label for="cupom">Cupom de desconto</label>
+            <div class="cupom-campo">
+              <input id="cupom" #campoCupom type="text" placeholder="Código" autocomplete="off"
+                     (keydown.enter)="aplicarCupom(campoCupom.value)" />
+              <button type="button" class="btn-secundario" (click)="aplicarCupom(campoCupom.value)">Aplicar</button>
+            </div>
+            @if (mensagemCupom()) {
+              <p class="erro" role="alert">{{ mensagemCupom() }}</p>
+            }
+          }
+        </div>
+
+        <label class="idade">
+          <input type="checkbox" [checked]="maiorDeIdade()"
+                 (change)="maiorDeIdade.set($any($event.target).checked)" />
+          <span>Confirmo que tenho 18 anos ou mais.</span>
+        </label>
+
+        <button type="button" class="btn-principal" [disabled]="!maiorDeIdade()" (click)="finalizar()">
+          Finalizar pedido
+        </button>
+        @if (!maiorDeIdade()) {
+          <p class="dica">Confirme a maioridade para finalizar.</p>
+        }
+
+        <button type="button" class="link limpar" (click)="limpar()">Esvaziar carrinho</button>
+      </aside>
+    </div>
+  }
+</section>

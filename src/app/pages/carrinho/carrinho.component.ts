@@ -1,27 +1,26 @@
 import { Component, signal, computed } from '@angular/core';
-
-type Tipo = 'tinto' | 'branco' | 'rose' | 'espumante';
+import { HeaderComponent } from '../../components/header/header.component';
+type Tipo = 'vinho' | 'cerveja' | 'destilado';
 
 interface ItemCarrinho {
   id: number;
   nome: string;
   produtor: string;
   origem: string;
-  safra: string;
   tipo: Tipo;
+  imagem: string;
   preco: number;
   quantidade: number;
 }
 
 const EXEMPLO: ItemCarrinho[] = [
-  { id: 1, nome: 'Reserva Tinto', produtor: 'Quinta do Vale Alto', origem: 'Douro, Portugal', safra: 'Safra 2020', tipo: 'tinto', preco: 189.9, quantidade: 2 },
-  { id: 2, nome: 'Cabernet Sauvignon Gran Reserva', produtor: 'Viña Los Andes', origem: 'Maipo, Chile', safra: 'Safra 2019', tipo: 'tinto', preco: 142.0, quantidade: 1 },
-  { id: 3, nome: 'Chardonnay', produtor: 'Vinícola Pedra Azul', origem: 'Vale dos Vinhedos, Brasil', safra: 'Safra 2022', tipo: 'branco', preco: 89.9, quantidade: 1 },
-  { id: 4, nome: 'Espumante Brut', produtor: 'Cave da Serra', origem: 'Serra Gaúcha, Brasil', safra: 'Sem safra', tipo: 'espumante', preco: 118.0, quantidade: 3 },
+  { id: 1, nome: 'Vinho Reservado Cabernet Sauvignon 750ml', produtor: 'Concha y Toro', origem: 'Chile', tipo: 'vinho', imagem: 'imgs/produtos/vinho.png', preco: 27.9, quantidade: 1 },
+  { id: 2, nome: 'Cerveja Puro Malte Black Princess Gold Lata 350ml', produtor: 'Cervejaria Monte Claro', origem: 'Minas Gerais, Brasil', tipo: 'cerveja', imagem: 'imgs/produtos/cerveja.png', preco: 4.7, quantidade: 4 },
+  { id: 3, nome: 'Whisky Johnnie Walker Black Label 12 Anos 750ml', produtor: 'Diageo BR', origem: 'Highlands, Escócia', tipo: 'destilado', imagem: 'imgs/produtos/whisky.png', preco: 122.6, quantidade: 1 },
 ];
 
 @Component({
-  imports: [],
+  imports: [HeaderComponent],
   selector: 'app-carrinho',
   styleUrl: './carrinho.component.css',
   templateUrl: './carrinho.component.html',
@@ -34,10 +33,9 @@ export class CarrinhoComponent {
   readonly freteGratisAcima = 300;
 
   readonly tipos: Record<Tipo, string> = {
-    tinto: 'Tinto',
-    branco: 'Branco',
-    rose: 'Rosé',
-    espumante: 'Espumante',
+    vinho: 'Vinho',
+    destilado: 'Destilado',
+    cerveja: 'Cerveja',
   };
 
   // Record serve para identificar o codigo e retornar o valor do desconto, caso o codigo seja valido.
