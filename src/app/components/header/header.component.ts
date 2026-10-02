@@ -4,8 +4,8 @@ import { RouterLink } from '@angular/router';
 @Component({
   imports: [RouterLink],
   selector: 'app-header',
-  styleUrl: './header.css',
-  templateUrl: './header.html',
+  styleUrl: './header.component.css',
+  templateUrl: './header.component.html',
 })
 export class HeaderComponent {
   itensNoCarrinho = 0;
