@@ -1,0 +1,275 @@
+/* Página de Manutenção de Produtos */
+
+.manutencao-page {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 20px;
+  font-family: Arial, sans-serif;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.page-header h1 {
+  color: #6b1e3d;
+  margin-bottom: 5px;
+}
+
+.subtitulo {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Mensagem de aviso/sucesso */
+.alerta-feedback {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Layout lado a lado */
+.manutencao-grid {
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+}
+
+/* Estilo comum dos dois blocos */
+.painel {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* LADO ESQUERDO: Formulário */
+
+.painel-form {
+  width: 320px;
+  padding: 20px;
+}
+
+.painel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.painel-header h2 {
+  font-size: 18px;
+  color: #6b1e3d;
+  margin: 0;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.badge-novo {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+.badge-edicao {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.campo-grupo {
+  margin-bottom: 15px;
+}
+
+.campo-grupo label {
+  display: block;
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.campo-grupo input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.campo-grupo input:focus {
+  border-color: #6b1e3d;
+  outline: none;
+}
+
+.botoes-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.botoes-form button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-ok {
+  background-color: #6b1e3d;
+  color: white;
+}
+
+.btn-ok:hover {
+  background-color: #4a1428;
+}
+
+.btn-canc {
+  background-color: #ccc;
+  color: #333;
+}
+
+.btn-canc:hover {
+  background-color: #bbb;
+}
+
+/* LADO DIREITO: Tabela Listagem de Produtos*/
+
+.painel-listagem {
+  flex: 1;
+}
+
+.janela-barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #6b1e3d;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px 8px 0 0;
+}
+
+.janela-titulo {
+  font-size: 16px;
+  margin: 0;
+}
+
+.janela-controles span {
+  margin-left: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.tabela-container {
+  padding: 15px;
+}
+
+.tabela-produtos {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tabela-produtos th,
+.tabela-produtos td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.tabela-produtos th {
+  background-color: #f9f9f9;
+  color: #555;
+  font-size: 13px;
+}
+
+.linha-ativa {
+  background-color: #fff3cd;
+}
+
+.tag-qtd {
+  font-weight: bold;
+}
+
+.tag-qtd.sem-estoque {
+  color: red;
+}
+
+.col-preco {
+  font-weight: bold;
+  color: #6b1e3d;
+}
+
+.btn-acao {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.btn-editar:hover {
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-excluir:hover {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+.tabela-vazia {
+  text-align: center;
+  color: #888;
+  padding: 20px;
+}
+
+.painel-rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-top: 1px solid #eee;
+  background-color: #fafafa;
+  border-radius: 0 0 8px 8px;
+}
+
+.btn-novo {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-novo:hover {
+  background-color: #218838;
+}
+
+/* Responsivo para telas menores */
+@media (max-width: 768px) {
+  .manutencao-grid {
+    flex-direction: column;
+  }
+
+  .painel-form {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

@@ -1,1 +1,158 @@
-<p>manutencao-produtos works!</p>
+<app-header></app-header>
+
+<main class="manutencao-page">
+  <div class="page-header">
+    <h1>Manutenção de Produtos</h1>
+    <p class="subtitulo">Gerencie o catálogo da adega: cadastre, altere preços, estoques e remova itens.</p>
+  </div>
+
+  <!-- Alerta de feedback -->
+  <div *ngIf="mensagemFeedback" class="alerta-feedback">
+    <i class="bi bi-check-circle-fill"></i>
+    <span>{{ mensagemFeedback }}</span>
+  </div>
+
+  <div class="manutencao-grid">
+    <!-- PAINEL ESQUERDO: Cadastrar Produto-->
+    <section class="painel painel-form" aria-labelledby="titulo-form">
+      <div class="painel-header">
+        <h2 id="titulo-form">{{ modoEdicao ? 'Editar Produto' : 'Cadastrar Produto' }}</h2>
+      </div>
+
+      <form (ngSubmit)="salvar()" class="form-produto">
+        <!-- Campo: NOME -->
+        <div class="campo-grupo">
+          <label for="campo-nome">NOME</label>
+          <input
+            type="text"
+            id="campo-nome"
+            name="nome"
+            [(ngModel)]="produtoForm.nome"
+            placeholder="Ex: Vinho Tinto Reservado"
+            required
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Campo: QTD -->
+        <div class="campo-grupo">
+          <label for="campo-qtd">QTD</label>
+          <input
+            type="number"
+            id="campo-qtd"
+            name="qtd"
+            [(ngModel)]="produtoForm.qtd"
+            min="0"
+            step="1"
+            placeholder="0"
+            required
+          />
+        </div>
+
+        <!-- Campo: PREÇO -->
+        <div class="campo-grupo">
+          <label for="campo-preco">PREÇO (R$)</label>
+          <input
+            type="number"
+            id="campo-preco"
+            name="preco"
+            [(ngModel)]="produtoForm.preco"
+            min="0"
+            step="0.01"
+            placeholder="0.00"
+            required
+          />
+        </div>
+
+        <!-- Botões: OK / CANC. -->
+        <div class="botoes-form">
+          <button type="submit" class="btn btn-ok" title="Salvar produto">
+            <i class="bi bi-check-lg"></i> OK
+          </button>
+          <button
+            type="button"
+            class="btn btn-canc"
+            (click)="cancelar()"
+            title="Cancelar e limpar campos"
+          >
+            <i class="bi bi-x-lg"></i> CANC.
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="painel painel-listagem" aria-labelledby="titulo-listagem">
+      <div class="janela-barra">
+        <h2 id="titulo-listagem" class="janela-titulo">LISTAGEM DE PRODUTOS</h2>
+      </div>
+
+      <!-- Tabela de Produtos -->
+      <div class="tabela-container">
+        <table class="tabela-produtos">
+          <thead>
+            <tr>
+              <th class="col-nome">NOME</th>
+              <th class="col-qtd">QTD</th>
+              <th class="col-preco">PREÇO</th>
+              <th class="col-acoes text-center">AÇÕES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of produtos"
+              [class.linha-ativa]="modoEdicao && produtoForm.id === item.id"
+            >
+              <td class="col-nome">
+                <strong>{{ item.nome }}</strong>
+              </td>
+              <td class="col-qtd">
+                <span class="tag-qtd" [class.sem-estoque]="item.qtd === 0">
+                  {{ item.qtd }}
+                </span>
+              </td>
+              <td class="col-preco">
+                {{ item.preco | currency: 'BRL' }}
+              </td>
+              <td class="col-acoes text-center">
+                <!-- Botão Editar (Ícone de lápis / esboço) -->
+                <button
+                  type="button"
+                  class="btn-acao btn-editar"
+                  (click)="editar(item)"
+                  title="Editar {{ item.nome }}"
+                  aria-label="Editar"
+                >
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                <!-- Botão Excluir (X do esboço) -->
+                <button
+                  type="button"
+                  class="btn-acao btn-excluir"
+                  (click)="excluir(item)"
+                  title="Remover {{ item.nome }}"
+                  aria-label="Remover"
+                >
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <tr *ngIf="produtos.length === 0">
+              <td colspan="4" class="tabela-vazia">
+                Nenhum produto cadastrado no momento.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Rodapé com botão NOVO conforme o esboço na lousa -->
+      <div class="painel-rodape">
+        <span class="total-itens">Total: {{ produtos.length }} produto(s)</span>
+        <button type="button" class="btn btn-novo" (click)="novo()">
+          <i class="bi bi-plus-lg"></i> NOVO
+        </button>
+      </div>
+    </section>
+  </div>
+</main>

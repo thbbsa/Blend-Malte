@@ -16,26 +16,26 @@ export class Produtos {
       categoria: 'Vinhos',
       preco: 49.90,
       estoque: 20,
-      imagem: 'assets/vinho.jpg',
+      imagem: 'imgs/produtos/vinho.png',
       descricao: 'Vinho tinto nacional de sabor marcante.'
     },
     {
       id: 2,
-      nome: 'Cerveja Premium',
+      nome: 'Cerveja Black Princess',
       categoria: 'Cervejas',
-      preco: 8.99,
+      preco: 6.99,
       estoque: 50,
-      imagem: 'assets/cerveja.jpg',
+      imagem: 'imgs/produtos/cerveja.png',
       descricao: 'Cerveja premium de sabor equilibrado.'
     },
     {
       id: 3,
-      nome: 'Whisky 12 Anos',
+      nome: 'Whisky Black Label',
       categoria: 'Destilados',
-      preco: 129.90,
+      preco: 169.90,
       estoque: 10,
-      imagem: 'assets/whisky.jpg',
-      descricao: 'Whisky envelhecido por 12 anos.'
+      imagem: 'imgs/produtos/whisky.png',
+      descricao: 'Whisky Black Label envelhecido por 12 anos.'
     }
   ];
 }
