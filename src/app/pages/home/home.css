@@ -1,0 +1,84 @@
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding: 80px 56px;
+    background: #1f1610;
+    color: #f6f2e9;
+}
+
+.hero-entiqueta {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #e9c77a;
+}
+
+.hero h1 {
+    max-width: 16ch;
+    margin: 0;
+    font: 800 clamp(2rem, 5vw, 3.6rem)/1.05 "Bricolage Grotesque", sans-serif;
+    color: #c28a2c;
+}
+
+.hero p {
+    max-width: 44ch;
+    margin: 16px 0 28px;
+    opacity: 0.85;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border: 0;
+    border-radius: 10px;
+    font: 700 1rem "DM Sans", sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-ouro {
+    background: #c28a2c;
+    color: #1f1610;
+}
+
+.btn-ouro:hover {
+    background: #d49a37;
+}
+
+.hero-imagens {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.hero-imagens img {
+    height: 240px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.hero-imagens img:hover {
+    transform: scale(1.12);
+}
+
+@media (max-width: 760px) {
+    .hero {
+        padding: 48px 24px;
+    }
+
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-imagens img {
+        height: 150px;
+    }
+}
