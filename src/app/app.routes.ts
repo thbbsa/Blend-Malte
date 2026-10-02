@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 import { Produtos } from './pages/produtos/produtos';
-import { Carrinho } from './pages/carrinho/carrinho.component';
+import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 
 export const routes: Routes = [
     {
@@ -10,7 +10,7 @@ export const routes: Routes = [
   },
     {
     path: 'carrinho',
-    component: Carrinho
+    component: CarrinhoComponent
   },
   {
     path: 'produtos',
