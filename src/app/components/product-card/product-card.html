@@ -1,19 +1,18 @@
-<div class="card-produto">
-    <img [src]="produto().imagem" [alt]="produto().nome">
+<article class="card-produto">
+    <div class="foto">
+        <img [src]="produto().imagem" [alt]="produto().nome" loading="lazy">
+    </div>
 
-    <h2>{{ produto().nome }}</h2>
+    <span class="tag">{{ produto().categoria }}</span>
+    <h3>{{ produto().nome }}</h3>
+    <p class="descricao">{{ produto().descricao }}</p>
 
-    <p>{{ produto().categoria }}</p>
+    <strong>{{ produto().preco | currency:'BRL' }}</strong>
 
-    <p>{{ produto().descricao }}</p>
-
-    <strong>
-        {{ produto().preco | currency:'BRL' }}
-    </strong>
-
-    <p>Estoque: {{ produto().estoque }}</p>
-
-    <button>
-        Adicionar ao carrinho
+    <button
+        type="button"
+        [disabled]="produto().estoque === 0"
+        (click)="adicionar.emit(produto())">
+        {{ produto().estoque === 0 ? 'Esgotado' : 'Adicionar ao carrinho' }}
     </button>
-</div>
+</article>

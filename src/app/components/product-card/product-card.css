@@ -57,3 +57,13 @@ h1 {
 .card-produto button:hover {
   background-color: #4a1428;
 }
+
+.card-produto button:disabled {
+    background-color: #c9c0ae;
+    color: #7a6f5d;
+    cursor: not-allowed;
+}
+
+.card-produto button:disabled:hover {
+    background-color: #c9c0ae;   
+}

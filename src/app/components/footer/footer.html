@@ -1,1 +1,32 @@
-<p>footer works!</p>
+<footer>
+  <div class="colunas">
+    <nav aria-label="Institucional">
+      <h3>Institucional</h3>
+      <a>Sobre nós</a>
+      <a>Contato</a>
+      <a>Políticas</a>
+      <a>FAQ</a>
+    </nav>
+
+    <nav aria-label="Categorias">
+      <h3>Categorias</h3>
+      <a routerLink="/produtos">Vinhos</a>
+      <a routerLink="/produtos">Cervejas</a>
+      <a routerLink="/produtos">Destilados</a>
+    </nav>
+
+    <div class="pagamento">
+      <h3>Pagamento</h3>
+      <div class="selos">
+        <span>Visa</span>
+        <span>Mastercard</span>
+        <span>Amex</span>
+        <span>Pix</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="base">
+    <small>© {{ ano }} Blend &amp; Malte. Todos os direitos reservados.</small>
+  </div>
+</footer>

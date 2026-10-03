@@ -3,9 +3,10 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { RouterLink } from '@angular/router';
 import { ProductCard } from '../../components/product-card/product-card';
 import { Produto } from '../../models/produto';
+import { Footer } from '../../components/footer/footer';
 
 @Component({
-  imports: [HeaderComponent, ProductCard, RouterLink],
+  imports: [HeaderComponent, ProductCard, Footer, RouterLink],
   selector: 'app-home',
   styleUrl: './home.css',
   templateUrl: './home.html',
@@ -66,14 +67,5 @@ export class Home {
         imagem: 'imgs/produtos/whisky.png',
         descricao: 'Whisky Black Label envelhecido por 12 anos.'
       },
-      {
-        id: 3,
-        nome: 'Whisky Black Label',
-        categoria: 'Destilados',
-        preco: 169.90,
-        estoque: 10,
-        imagem: 'imgs/produtos/whisky.png',
-        descricao: 'Whisky Black Label envelhecido por 12 anos.'
-      }
     ];
 }

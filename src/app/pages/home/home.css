@@ -173,3 +173,43 @@
   padding: 20px;
 }
 
+
+
+/* Benefícios */
+
+.beneficios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 1400px;
+    margin: 56px auto 0;
+    padding: 24px;
+    border-top: 1px solid #e3dccb;;
+}
+
+
+.beneficio {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.beneficio i {
+    font-size: 1.8rem;
+    color: #c28a2c;
+}
+
+.beneficio strong {
+    display: block;
+}
+
+.beneficio span {
+    font-size: 0.95rem;
+    color: #5c4d3d;
+}
+
+@media (max-width: 760px) {
+  .beneficios {
+    grid-template-columns: 1fr;
+  }
+}
