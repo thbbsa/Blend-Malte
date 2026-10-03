@@ -14,3 +14,36 @@
         <img src="imgs/produtos/cerveja.png" alt="Cerveja artesanal">
     </div>
 </section>
+
+<section class="categorias">
+    <a class="cat vinho" routerLink="/produtos">
+        <i class="bi bi-cup-straw"></i>
+        <strong>Vinhos</strong>
+        <span>Tintos, brancos e espumantes</span>
+    </a>
+
+    <a class="cat cerveja" routerLink="/produtos">
+        <i class="bi bi-cup-hot"></i>
+        <strong>Cervejas</strong>
+        <span>IPAs, lagers e artesanais</span>
+    </a>
+
+    <a class="cat destilado" routerLink="/produtos">
+        <i class="bi bi-cup"></i>
+        <strong>Destilados</strong>
+        <span>Whisky, gin e mais</span>
+    </a>
+</section>
+
+<section class="produtos">
+    <div class="vitrine-topo">
+        <h2>Produtos em Destaque</h2>
+        <a routerLink="/produtos">Ver todos <i class="bi bi-arrow-right"></i></a>
+    </div>
+
+    <div class="lista-produtos">
+        @for (p of produtos; track p.id) {
+        <app-product-card [produto]="p"></app-product-card>
+        }
+    </div>
+</section>

@@ -1,23 +1,7 @@
 <h1>Produtos da Adega</h1>
 
 <div class="lista-produtos">
-  <div class="card-produto" *ngFor="let produto of produtos">
-    <img [src]="produto.imagem" [alt]="produto.nome">
-
-    <h2>{{ produto.nome }}</h2>
-
-    <p>{{ produto.categoria }}</p>
-
-    <p>{{ produto.descricao }}</p>
-
-    <strong>
-      {{ produto.preco | currency:'BRL' }}
-    </strong>
-
-    <p>Estoque: {{ produto.estoque }}</p>
-
-    <button>
-      Adicionar ao carrinho
-    </button>
-  </div>
-</div>
+  @for (p of produtos; track p.id) {
+    <app-product-card [produto]="p"></app-product-card>
+  }
+</div>  

@@ -1,10 +1,11 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Produto } from '../../models/produto';
+import { ProductCard } from '../../components/product-card/product-card';
+
 
 @Component({
   selector: 'app-produtos',
-  imports: [CommonModule],
+  imports: [ProductCard],
   templateUrl: './produtos.html',
   styleUrl: './produtos.css'
 })

@@ -1,3 +1,5 @@
+/* HERO */
+
 .hero {
     display: flex;
     justify-content: center;
@@ -82,3 +84,92 @@
         height: 150px;
     }
 }
+
+
+/* Categorias */
+
+.categorias {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 1400px;
+    margin: 24px auto 56px;
+    padding-inline: 24px;
+}
+
+.cat {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 4px;
+    min-height: 100px;
+    padding: 28px;
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.cat:hover {
+    transform: translateY(-3px);
+}
+
+.cat i {
+    margin-bottom: auto;
+    font-size: 1.8rem;
+}
+
+.cat strong {
+  font: 700 1.5rem "Bricolage Grotesque", sans-serif;
+}
+
+.cat span {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}   
+
+.cat.vinho     { background: #6b1d2f; }
+.cat.cerveja   { background: #c28a2c; color: #1f1610; }
+.cat.destilado { background: #3a2616; }
+
+@media (max-width: 760px) {
+  .categorias {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Lista de Produtos */
+
+.vitrine-topo {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    max-width: 1650px;
+    margin: 0 auto 20px;
+    padding-inline: 24px;
+}
+
+.vitrine-topo h2 {
+    margin: 0;
+    font: 700 1.7rem "Bricolage Grotesque", sans-serif;
+}
+
+.vitrine-topo a {
+    color: #8f6317;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.vitrine-topo a:hover {
+    color: #c28a2c;
+}
+
+.lista-produtos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+

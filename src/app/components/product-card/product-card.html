@@ -1,1 +1,19 @@
-<p>product-card works!</p>
+<div class="card-produto">
+    <img [src]="produto().imagem" [alt]="produto().nome">
+
+    <h2>{{ produto().nome }}</h2>
+
+    <p>{{ produto().categoria }}</p>
+
+    <p>{{ produto().descricao }}</p>
+
+    <strong>
+        {{ produto().preco | currency:'BRL' }}
+    </strong>
+
+    <p>Estoque: {{ produto().estoque }}</p>
+
+    <button>
+        Adicionar ao carrinho
+    </button>
+</div>
