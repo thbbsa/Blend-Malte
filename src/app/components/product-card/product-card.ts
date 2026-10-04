@@ -9,5 +9,5 @@ import { CurrencyPipe } from '@angular/common';
   templateUrl: './product-card.html',
 })
 export class ProductCard {
-  produto = input.required<Produto>();
+  produto = input.required<Produto>(); 
 }

@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { Produto } from '../../models/produto';
 import { ProductCard } from '../../components/product-card/product-card';
+import { HeaderComponent } from '../../components/header/header.component';
+
+import { ActivatedRoute } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 
 @Component({
   selector: 'app-produtos',
-  imports: [ProductCard],
+  imports: [HeaderComponent, ProductCard],
   templateUrl: './produtos.html',
   styleUrl: './produtos.css'
 })
@@ -39,4 +44,18 @@ export class Produtos {
       descricao: 'Whisky Black Label envelhecido por 12 anos.'
     }
   ];
+
+  private rota = inject(ActivatedRoute);
+
+  categoria = toSignal(
+    this.rota.paramMap.pipe(map(p => p.get('categoria'))),
+    { initialValue: null }
+  );
+
+  produtosFiltrados = computed(() => {
+    const cat = this.categoria();
+    if (!cat) return this.produtos;
+
+    return this.produtos.filter(p => p.categoria.toLowerCase() === cat.toLowerCase());
+  })
 }

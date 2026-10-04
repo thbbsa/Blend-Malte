@@ -1,7 +1,11 @@
+<app-header></app-header>
+
 <h1>Produtos da Adega</h1>
 
 <div class="lista-produtos">
-  @for (p of produtos; track p.id) {
+  @for (p of produtosFiltrados(); track p.id) {
     <app-product-card [produto]="p"></app-product-card>
+  } @empty {
+    <p>Nenhum produto nesta categoria.</p>
   }
 </div>  
