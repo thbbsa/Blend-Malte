@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   imports: [RouterLink],
@@ -8,5 +8,12 @@ import { RouterLink } from '@angular/router';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  itensNoCarrinho = 0;
+  private router = inject(Router);
+  itensNoCarrinho = 3;
+
+  buscar(evento: Event, texto: string) {
+    evento.preventDefault();
+    this.router.navigate(['/produtos'], { queryParams: { busca: texto.trim() || null } });
+  }
 }
+

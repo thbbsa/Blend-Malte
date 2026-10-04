@@ -52,10 +52,23 @@ export class Produtos {
     { initialValue: null }
   );
 
+  busca = toSignal(
+    this.rota.queryParamMap.pipe(map(p => p.get('busca'))),
+    { initialValue: null }
+  );
+
+  private limpar(texto: string): string {
+    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  }
+
   produtosFiltrados = computed(() => {
     const cat = this.categoria();
-    if (!cat) return this.produtos;
+    const termo = this.busca();
 
-    return this.produtos.filter(p => p.categoria.toLowerCase() === cat.toLowerCase());
-  })
+    return this.produtos.filter(p => {
+      const daCategoria = !cat || this.limpar(p.categoria) === this.limpar(cat);
+      const doTermo = !termo || this.limpar(p.nome + ' ' + p.descricao).includes(this.limpar(termo));
+      return daCategoria && doTermo;
+    });
+  });
 }

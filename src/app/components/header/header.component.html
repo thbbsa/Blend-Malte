@@ -12,8 +12,8 @@
         </ul>
     </nav>
 
-    <form class="busca" role="search">
-        <input type="search" placeholder="Buscar produtos" aria-label="Buscar produtos">
+    <form class="busca" role="search" (submit)="buscar($event, campo.value)">
+        <input #campo type="search" placeholder="Buscar produtos" aria-label="Buscar produtos">
         <button type="submit" aria-label="Buscar"><i class="bi bi-search"></i></button>
     </form>
 
