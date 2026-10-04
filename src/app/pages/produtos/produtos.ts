@@ -6,11 +6,12 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { Footer } from '../../components/footer/footer';
 
 
 @Component({
   selector: 'app-produtos',
-  imports: [HeaderComponent, ProductCard],
+  imports: [HeaderComponent, Footer, ProductCard],
   templateUrl: './produtos.html',
   styleUrl: './produtos.css'
 })
