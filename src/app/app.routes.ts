@@ -5,14 +5,19 @@ import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { ManutencaoProdutos } from './pages/manutencao-produtos/manutencao-produtos';
 import { CadastroCliente } from './pages/cadastro-cliente/cadastro-cliente';
 
+<<<<<<< HEAD
 import { Login } from './pages/login/login';
 
+=======
+import { Checkout } from './pages/checkout/checkout';
+>>>>>>> 408b22ca48432fe1634dd376c2435e6e1d270604
 
 export const routes: Routes = [
   {
     path: '',
     component: Home,
   },
+  { path: 'checkout', component: Checkout },
   {
     path: 'login',
     component: Login,
@@ -38,4 +43,3 @@ export const routes: Routes = [
     component: CadastroCliente,
   },
 ];
-

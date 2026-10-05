@@ -11,8 +11,8 @@
 
     <button
         type="button"
-        [disabled]="produto().estoque === 0"
+        [disabled]="!carrinho.podeAdicionar(produto())" (click)="carrinho.adicionar(produto())"
     >
-        {{ produto().estoque === 0 ? 'Esgotado' : 'Adicionar ao carrinho' }}
+        {{ produto().estoque === 0 ? 'Esgotado' : !carrinho.podeAdicionar(produto()) ? 'Limite atingido' : 'Adicionar ao carrinho' }}
     </button>
 </article>

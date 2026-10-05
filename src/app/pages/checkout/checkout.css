@@ -1,0 +1,135 @@
+:host {
+  display: block;
+  background: #f6f2e9;
+  color: #1f1610;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+.checkout {
+  max-width: 1200px;
+  margin: auto;
+  padding: 32px 24px 64px;
+}
+a {
+  color: #8a5f12;
+}
+h1 {
+  margin-bottom: 8px;
+}
+h2 {
+  font-size: 1.25rem;
+  margin: 0 0 20px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 28px;
+  align-items: start;
+  margin-top: 24px;
+}
+.painel {
+  background: #fffdf8;
+  border: 1px solid #e3dccb;
+  border-radius: 12px;
+  padding: 24px;
+}
+.campos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+}
+.inteiro {
+  grid-column: 1 / -1;
+}
+input,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #c8beaa;
+  border-radius: 6px;
+  background: white;
+  color: inherit;
+  font: inherit;
+}
+input:focus,
+select:focus {
+  outline: 2px solid #c28a2c;
+  outline-offset: 2px;
+}
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-color: #b3261e;
+}
+.erro {
+  color: #b3261e;
+}
+.aviso,
+small {
+  color: #6b5d4f;
+}
+.botao {
+  display: inline-block;
+  background: #8a5f12;
+  color: white;
+  border: 0;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #e3dccb;
+}
+li img {
+  width: 40px;
+  height: 60px;
+  object-fit: contain;
+}
+li div {
+  flex: 1;
+}
+li strong {
+  white-space: nowrap;
+}
+small {
+  display: block;
+}
+dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+dd {
+  margin: 0;
+}
+.total {
+  border-top: 1px solid #e3dccb;
+  padding-top: 16px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.confirmacao {
+  max-width: 650px;
+  margin: 24px auto;
+  text-align: center;
+}

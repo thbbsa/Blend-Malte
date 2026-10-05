@@ -9,20 +9,11 @@
     }
   </header>
 
-  @if (pedidoConfirmado(); as pedido) {
-    <div class="aviso-central" role="status">
-      <h2>Pedido recebido</h2>
-      <p>
-        Total de {{ moeda(pedido.total) }} em {{ pedido.garrafas }}
-        {{ pedido.garrafas === 1 ? 'garrafa' : 'garrafas' }}. Nós avisamos quando o pedido sair da adega.
-      </p>
-      <button type="button" class="btn-principal" (click)="restaurarExemplo()">Montar novo carrinho</button>
-    </div>
-  } @else if (!itens().length) {
+  @if (!itens().length) {
     <div class="aviso-central">
       <h2>Nenhuma garrafa por aqui</h2>
       <p>Escolha rótulos no catálogo para começar o pedido.</p>
-      <button type="button" class="btn-secundario" (click)="restaurarExemplo()">Carregar exemplo</button>
+      <a class="btn-secundario" routerLink="/produtos">Ver produtos</a>
     </div>
   } @else {
     <div class="layout">
@@ -33,17 +24,17 @@
 
             <div class="detalhes">
               <h2>{{ item.nome }}</h2>
-              <p class="produtor">{{ item.produtor }}</p>
-              <p class="origem">{{ item.origem }}</p>
+
+
               <p class="etiquetas">
-                <span>{{ tipos[item.tipo] }}</span>
+                <span>{{ item.categoria }}</span>
               </p>
             </div>
 
             <div class="quantidade" role="group" [attr.aria-label]="'Quantidade de ' + item.nome">
               <button type="button" (click)="alterarQuantidade(item.id, -1)" [disabled]="item.quantidade <= 1" aria-label="Diminuir quantidade">−</button>
               <output>{{ item.quantidade }}</output>
-              <button type="button" (click)="alterarQuantidade(item.id, 1)" [disabled]="item.quantidade >= limitePorItem" aria-label="Aumentar quantidade">+</button>
+              <button type="button" (click)="alterarQuantidade(item.id, 1)" [disabled]="item.quantidade >= carrinho.limite(item)" aria-label="Aumentar quantidade">+</button>
             </div>
 
             <div class="valores">
@@ -104,7 +95,7 @@
         </label>
 
         <button type="button" class="btn-principal" [disabled]="!maiorDeIdade()" (click)="finalizar()">
-          Finalizar pedido
+          Confirmar compra e continuar
         </button>
         @if (!maiorDeIdade()) {
           <p class="dica">Confirme a maioridade para finalizar.</p>
@@ -115,3 +106,4 @@
     </div>
   }
 </section>
+<app-footer />
