@@ -18,10 +18,6 @@ export const routes: Routes = [
     component: Login,
   },
   {
-    path: 'login',
-    component: Login,
-  },
-  {
     path: 'carrinho',
     component: CarrinhoComponent,
   },
