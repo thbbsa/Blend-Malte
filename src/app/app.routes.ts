@@ -8,6 +8,8 @@ import { Checkout } from './pages/checkout/checkout';
 import { Login } from './pages/login/login';
 
 
+
+
 export const routes: Routes = [
   {
     path: '',
@@ -41,4 +43,10 @@ export const routes: Routes = [
     path: 'cadastro-cliente',
     component: CadastroCliente,
   },
+
 ];
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> c6763a0 (página de cadastro)

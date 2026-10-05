@@ -1,0 +1,96 @@
+
+.cadastro-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  width: 100%;
+}
+
+
+.form-card {
+  background-color: #FFFFFF;
+  width: 100%;
+  max-width: 650px;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border-top: 5px solid #C49A45; 
+}
+
+
+.form-card h2 {
+  color: #212121;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.form-card p {
+  color: #666666;
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+
+.form-group label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 6px;
+}
+
+
+.form-group input {
+  padding: 12px 14px;
+  border: 1px solid #DCDCDC;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+
+.form-group input:focus {
+  border-color: #C49A45;
+  box-shadow: 0 0 0 3px rgba(196, 154, 69, 0.2);
+}
+
+
+.btn-cadastrar {
+  width: 100%;
+  margin-top: 15px;
+  padding: 14px;
+  background-color: #212121; /* Preto escuro da marca */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s transform 0.1s;
+}
+
+.btn-cadastrar:hover {
+  background-color: #C49A45; /* Fica dourado ao passar o rato/mouse */
+}
+
+.btn-cadastrar:active {
+  transform: scale(0.99);
+}
