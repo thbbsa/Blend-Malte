@@ -1,27 +1,36 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header.component';
-import { Footer } from '../../components/footer/footer';
-import { sessao } from '../../models/loja';
+
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.Default,
-  imports: [FormsModule, RouterLink, HeaderComponent, Footer],
-  selector: 'app-login', styleUrl: './login.css', templateUrl: './login.html',
+  selector: 'app-login',
+  imports: [HeaderComponent, RouterLink],
+  templateUrl: './login.html',
+  styleUrl: './login.css',
 })
 export class Login {
-  sessao = sessao;
-  erro = '';
-  email = '';
-  senha = '';
+  // credenciais fixas, só para teste
+  private readonly EMAIL = 'cliente@email.com';
+  private readonly SENHA = '123456';
 
-  entrar(form: NgForm): void {
-    if (form.invalid || !this.sessao.entrar(this.email, this.senha)) {
-      this.erro = 'Confira o e-mail e a senha da conta de demonstração.';
+  erro = signal('');
+  sucesso = signal('');
+
+  entrar(evento: Event, email: string, senha: string) {
+    evento.preventDefault();
+
+    if (!email.trim() || !senha) {
+      this.erro.set('Preencha o e-mail e a senha.');
       return;
     }
-    this.erro = '';
-    this.senha = '';
+
+    if (email.trim().toLowerCase() !== this.EMAIL || senha !== this.SENHA) {
+      this.erro.set('E-mail ou senha incorretos.');
+      return;
+    }
+
+    this.erro.set('');
+    this.sucesso.set('Você já pode aproveitar a loja.');
   }
 }

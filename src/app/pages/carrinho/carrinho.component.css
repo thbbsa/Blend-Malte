@@ -9,14 +9,16 @@
   --dourado-escuro: #8a5f12;
   --erro: #b3261e;
 
-  display: block;
-  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background: var(--fundo);
   color: var(--texto);
   line-height: 1.5;
 }
 
 .carrinho {
+  flex: 1;
   max-width: 1400px;
   margin: 0 auto;
   padding: 40px 24px 64px;

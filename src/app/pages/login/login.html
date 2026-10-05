@@ -1,20 +1,52 @@
-<app-header />
-<main class="conta">
-  @if (sessao.cliente; as cliente) {
-    <h1>Olá, {{ cliente.nome }}!</h1>
-    <p>Você entrou na conta de demonstração.</p>
-    <a routerLink="/produtos">Continuar comprando</a>
-    <button type="button" (click)="sessao.sair()">Sair da conta</button>
-  } @else {
-    <h1>Entrar na conta</h1>
-    <p>Conta de demonstração: <strong>cliente@blendmalte.com</strong> / senha <strong>123456</strong>.</p>
-    <form #form="ngForm" (ngSubmit)="entrar(form)">
-      <label for="email-login">E-mail<input id="email-login" type="email" name="email" [(ngModel)]="email" required email autocomplete="username"></label>
-      <label for="senha-login">Senha<input id="senha-login" type="password" name="senha" [(ngModel)]="senha" required autocomplete="current-password"></label>
-      @if (erro) { <p role="alert">{{ erro }}</p> }
-      <button type="submit">Entrar</button>
-    </form>
-    <a routerLink="/cadastro-cliente">Criar conta</a>
-  }
+<app-header></app-header>
+
+<main>
+    <section class="login-card">
+
+        @if (sucesso()) {
+            <div class="concluido" role="status">
+                <i class="bi bi-check-circle"></i>
+                <h1>Login concluído</h1>
+                <p class="sub">{{ sucesso() }}</p>
+                <a class="voltar" routerLink="/">Ir para a home</a>
+            </div>
+        } @else {
+            <h1>Entrar na conta</h1>
+
+            <p class="sub">Use seu e-mail e senha para acessar o site</p>
+
+            <form novalidate (submit)="entrar($event, email.value, senha.value)">
+                <label for="email">E-mail</label>
+                <input
+                    #email
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    placeholder="cliente@email.com"
+                >
+
+                <label for="senha">Senha</label>
+                <input
+                    #senha
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    autocomplete="current-password"
+                >
+
+                @if (erro()) {
+                    <p class="erro" role="alert">{{ erro() }}</p>
+                }
+
+                <button type="submit">Entrar</button>
+            </form>
+
+            <p class="links">
+                <a routerLink="/esqueci-senha">Esqueci a senha</a>
+                <a routerLink="/cadastro-cliente">Criar conta</a>
+            </p>
+        }
+
+    </section>
 </main>
-<app-footer />
