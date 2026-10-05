@@ -7,10 +7,15 @@ import { CadastroCliente } from './pages/cadastro-cliente/cadastro-cliente';
 import { Checkout } from './pages/checkout/checkout';
 import { Login } from './pages/login/login';
 
+
 export const routes: Routes = [
   {
     path: '',
     component: Home,
+  },
+  {
+    path: 'login',
+    component: Login,
   },
   {
     path: 'login',
