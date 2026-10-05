@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { CarrinhoService } from '../../services/carrinho.service';
+import { carrinho } from '../../models/loja';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Default,
   imports: [RouterLink],
   selector: 'app-header',
   styleUrl: './header.component.css',
@@ -10,7 +11,9 @@ import { CarrinhoService } from '../../services/carrinho.service';
 })
 export class HeaderComponent {
   private router = inject(Router);
-  readonly itensNoCarrinho = inject(CarrinhoService).totalGarrafas;
+  carrinho = carrinho;
+
+  itensNoCarrinho(): number { return this.carrinho.totalGarrafas(); }
 
   buscar(evento: Event, texto: string) {
     evento.preventDefault();

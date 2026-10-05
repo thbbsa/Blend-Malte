@@ -40,7 +40,7 @@ class carrinho {
 
 class Cliente extends usuario{
     constructor(id, nome, email, senha){
-        SourceBuffer(id, nome, email, senha);
+        super(id, nome, email, senha);
         this.carrinho = new carrinho();
     }
 }
@@ -78,13 +78,13 @@ if(form){
         }
 
         sessionStorage.setItem("UsuarioLogado", cliente.nome);
-        window.location.href = " home.html"; //Puxando a pagina Home
+        window.location.href = "home.html"; //Puxando a pagina Home
     });
 }
 
 // Pagina Inicial //
 
-const boasVindas = document.getElementById("Boas-Vindas");
+const boasVindas = document.getElementById("boas-vindas");
 
 if(boasVindas){
 
@@ -96,7 +96,7 @@ if(boasVindas){
         boasVindas.textContent = " Ola," + nome + "!";
     }
 
-    document.getElementById("Sair"). addEventListener("click", () => {
+    document.getElementById("sair"). addEventListener("click", () => {
         sessionStorage.removeItem("UsuarioLogado");
         window.location.href= "login.html"
     });

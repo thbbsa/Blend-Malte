@@ -1,21 +1,21 @@
 <app-header />
 <main class="checkout">
-  @if (concluido()) {
+  @if (concluido) {
     <section class="painel confirmacao" role="status">
       <h1>Compra concluída</h1>
       <p>
-        {{ resumoConfirmado().quantidade }} unidade(s), total de
-        {{ moeda(resumoConfirmado().total) }}.
+        {{ resumoConfirmado.quantidade }} unidade(s), total de
+        {{ moeda(resumoConfirmado.total) }}.
       </p>
       <a class="botao" routerLink="/produtos">Continuar comprando</a>
     </section>
-  } @else if (!carrinho.itens().length) {
+  } @else if (!carrinho.itens.length) {
     <section class="painel">
       <h1>Seu carrinho está vazio</h1>
       <p>Adicione produtos para continuar para o checkout.</p>
       <a class="botao" routerLink="/produtos">Ver produtos</a>
     </section>
-  } @else if (!carrinho.maiorDeIdade()) {
+  } @else if (!carrinho.maiorDeIdade) {
     <section class="painel">
       <h1>Confirme sua compra</h1>
       <p>Revise o carrinho e confirme que tem 18 anos ou mais antes de continuar.</p>
@@ -185,7 +185,7 @@
       <aside class="painel resumo" aria-label="Resumo da compra">
         <h2>Resumo da compra</h2>
         <ul>
-          @for (item of carrinho.itens(); track item.id) {
+          @for (item of carrinho.itens; track item.id) {
             <li>
               <img [src]="item.imagem" [alt]="item.nome" />
               <div>
@@ -200,9 +200,9 @@
             <dt>Subtotal</dt>
             <dd>{{ moeda(carrinho.subtotal()) }}</dd>
           </div>
-          @if (carrinho.cupomAplicado()) {
+          @if (carrinho.cupomAplicado) {
             <div>
-              <dt>Desconto ({{ carrinho.cupomAplicado() }})</dt>
+              <dt>Desconto ({{ carrinho.cupomAplicado }})</dt>
               <dd>− {{ moeda(carrinho.desconto()) }}</dd>
             </div>
           }

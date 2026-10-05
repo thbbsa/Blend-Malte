@@ -2,14 +2,14 @@
 <section class="carrinho">
   <header class="topo">
     <h1>Seu carrinho</h1>
-    @if (itens().length) {
+    @if (carrinho.itens.length) {
       <p class="topo-info">
-        {{ totalGarrafas() }} {{ totalGarrafas() === 1 ? 'garrafa' : 'garrafas' }} reservadas
+        {{ carrinho.totalGarrafas() }} {{ carrinho.totalGarrafas() === 1 ? 'garrafa' : 'garrafas' }} reservadas
       </p>
     }
   </header>
 
-  @if (!itens().length) {
+  @if (!carrinho.itens.length) {
     <div class="aviso-central">
       <h2>Nenhuma garrafa por aqui</h2>
       <p>Escolha rótulos no catálogo para começar o pedido.</p>
@@ -18,7 +18,7 @@
   } @else {
     <div class="layout">
       <ul class="lista">
-        @for (item of itens(); track item.id) {
+        @for (item of carrinho.itens; track item.id) {
           <li class="item">
             <img class="foto" [src]="item.imagem" [alt]="item.nome" />
 
@@ -61,19 +61,19 @@
         </div>
 
         <dl class="linhas">
-          <div><dt>Subtotal</dt><dd>{{ moeda(subtotal()) }}</dd></div>
-          @if (cupomAplicado(); as codigo) {
+          <div><dt>Subtotal</dt><dd>{{ moeda(carrinho.subtotal()) }}</dd></div>
+          @if (carrinho.cupomAplicado; as codigo) {
             <div class="desconto">
-              <dt>Cupom {{ codigo }} ({{ percentualCupom() }}%)</dt>
-              <dd>− {{ moeda(desconto()) }}</dd>
+              <dt>Cupom {{ codigo }} ({{ carrinho.percentualCupom() }}%)</dt>
+              <dd>− {{ moeda(carrinho.desconto()) }}</dd>
             </div>
           }
-          <div><dt>Frete</dt><dd>{{ frete() === 0 ? 'Grátis' : moeda(frete()) }}</dd></div>
-          <div class="total"><dt>Total</dt><dd>{{ moeda(total()) }}</dd></div>
+          <div><dt>Frete</dt><dd>{{ carrinho.frete() === 0 ? 'Grátis' : moeda(carrinho.frete()) }}</dd></div>
+          <div class="total"><dt>Total</dt><dd>{{ moeda(carrinho.total()) }}</dd></div>
         </dl>
 
         <div class="cupom">
-          @if (cupomAplicado()) {
+          @if (carrinho.cupomAplicado) {
             <button type="button" class="link" (click)="removerCupom()">Remover cupom</button>
           } @else {
             <label for="cupom">Cupom de desconto</label>
@@ -82,22 +82,22 @@
                      (keydown.enter)="aplicarCupom(campoCupom.value)" />
               <button type="button" class="btn-secundario" (click)="aplicarCupom(campoCupom.value)">Aplicar</button>
             </div>
-            @if (mensagemCupom()) {
-              <p class="erro" role="alert">{{ mensagemCupom() }}</p>
+            @if (mensagemCupom) {
+              <p class="erro" role="alert">{{ mensagemCupom }}</p>
             }
           }
         </div>
 
         <label class="idade">
-          <input type="checkbox" [checked]="maiorDeIdade()"
-                 (change)="maiorDeIdade.set($any($event.target).checked)" />
+          <input type="checkbox" [checked]="carrinho.maiorDeIdade"
+                 (change)="carrinho.maiorDeIdade = $any($event.target).checked" />
           <span>Confirmo que tenho 18 anos ou mais.</span>
         </label>
 
-        <button type="button" class="btn-principal" [disabled]="!maiorDeIdade()" (click)="finalizar()">
+        <button type="button" class="btn-principal" [disabled]="!carrinho.maiorDeIdade" (click)="finalizar()">
           Confirmar compra e continuar
         </button>
-        @if (!maiorDeIdade()) {
+        @if (!carrinho.maiorDeIdade) {
           <p class="dica">Confirme a maioridade para finalizar.</p>
         }
 

@@ -1,10 +1,11 @@
+<app-header />
 <div class="cadastro-container">
   
   <div class="form-card">
     <h2>Criar sua Conta</h2>
     <p>Preencha os campos abaixo para se cadastrar na Blend & Malte</p>
 
-    <form (ngSubmit)="cadastrar()">
+    <p>Cadastro demonstrativo: os dados não serão salvos.</p><a routerLink="/login">Voltar para entrar</a><form #form="ngForm" (ngSubmit)="cadastrar(form)">
       
       <div class="form-group">
         <label for="nome">Nome Completo *</label>
@@ -23,7 +24,7 @@
 
       <div class="form-group">
         <label for="email">E-mail *</label>
-        <input type="email" id="email" name="email" [(ngModel)]="cliente.email" placeholder="seuemail@exemplo.com" required>
+        <input type="email" email id="email" name="email" [(ngModel)]="cliente.email" placeholder="seuemail@exemplo.com" required>
       </div>
 
       <div class="form-group">
@@ -41,9 +42,10 @@
         <input type="password" id="confirmarSenha" name="confirmarSenha" [(ngModel)]="cliente.confirmarSenha" placeholder="Confirme sua senha" required>
       </div>
 
-      <!-- Botão de Cadastro -->
+      @if (mensagem) { <p role="status">{{ mensagem }}</p> }
       <button type="submit" class="btn-cadastrar">Cadastrar</button>
     </form>
   </div>
 
 </div>
+<app-footer />

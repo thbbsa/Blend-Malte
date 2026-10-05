@@ -1,1 +1,20 @@
-<p>login works!</p>
+<app-header />
+<main class="conta">
+  @if (sessao.cliente; as cliente) {
+    <h1>Olá, {{ cliente.nome }}!</h1>
+    <p>Você entrou na conta de demonstração.</p>
+    <a routerLink="/produtos">Continuar comprando</a>
+    <button type="button" (click)="sessao.sair()">Sair da conta</button>
+  } @else {
+    <h1>Entrar na conta</h1>
+    <p>Conta de demonstração: <strong>cliente@blendmalte.com</strong> / senha <strong>123456</strong>.</p>
+    <form #form="ngForm" (ngSubmit)="entrar(form)">
+      <label for="email-login">E-mail<input id="email-login" type="email" name="email" [(ngModel)]="email" required email autocomplete="username"></label>
+      <label for="senha-login">Senha<input id="senha-login" type="password" name="senha" [(ngModel)]="senha" required autocomplete="current-password"></label>
+      @if (erro) { <p role="alert">{{ erro }}</p> }
+      <button type="submit">Entrar</button>
+    </form>
+    <a routerLink="/cadastro-cliente">Criar conta</a>
+  }
+</main>
+<app-footer />

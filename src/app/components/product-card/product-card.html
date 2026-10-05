@@ -1,18 +1,18 @@
 <article class="card-produto">
     <div class="foto">
-        <img [src]="produto().imagem" [alt]="produto().nome" loading="lazy">
+        <img [src]="produto.imagem" [alt]="produto.nome" loading="lazy">
     </div>
 
-    <span class="tag">{{ produto().categoria }}</span>
-    <h3>{{ produto().nome }}</h3>
-    <p class="descricao">{{ produto().descricao }}</p>
+    <span class="tag">{{ produto.categoria }}</span>
+    <h3>{{ produto.nome }}</h3>
+    <p class="descricao">{{ produto.descricao }}</p>
 
-    <strong>{{ produto().preco | currency:'BRL' }}</strong>
+    <strong>{{ produto.preco | currency:'BRL' }}</strong>
 
     <button
         type="button"
-        [disabled]="!carrinho.podeAdicionar(produto())" (click)="carrinho.adicionar(produto())"
+        [disabled]="!carrinho.podeAdicionar(produto)" (click)="carrinho.adicionar(produto)"
     >
-        {{ produto().estoque === 0 ? 'Esgotado' : !carrinho.podeAdicionar(produto()) ? 'Limite atingido' : 'Adicionar ao carrinho' }}
+        {{ produto.estoque === 0 ? 'Esgotado' : !carrinho.podeAdicionar(produto) ? 'Limite atingido' : 'Adicionar ao carrinho' }}
     </button>
 </article>

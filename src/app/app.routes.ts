@@ -5,6 +5,7 @@ import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { ManutencaoProdutos } from './pages/manutencao-produtos/manutencao-produtos';
 import { CadastroCliente } from './pages/cadastro-cliente/cadastro-cliente';
 
+import { Login } from './pages/login/login';
 import { Checkout } from './pages/checkout/checkout';
 
 export const routes: Routes = [
@@ -12,6 +13,7 @@ export const routes: Routes = [
     path: '',
     component: Home,
   },
+  { path: 'login', component: Login },
   { path: 'checkout', component: Checkout },
   {
     path: 'carrinho',
@@ -33,4 +35,5 @@ export const routes: Routes = [
     path: 'cadastro-cliente',
     component: CadastroCliente,
   },
+  { path: '**', redirectTo: '' },
 ];

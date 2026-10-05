@@ -1,30 +1,28 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header.component';
 import { Footer } from '../../components/footer/footer';
-import { CarrinhoService } from '../../services/carrinho.service';
+import { carrinho } from '../../models/loja';
 
 @Component({
   imports: [HeaderComponent, Footer, RouterLink],
+  changeDetection: ChangeDetectionStrategy.Default,
   selector: 'app-carrinho',
   styleUrl: './carrinho.component.css',
   templateUrl: './carrinho.component.html',
 })
 export class CarrinhoComponent {
-  readonly carrinho = inject(CarrinhoService);
-  private readonly router = inject(Router);
-  readonly itens = this.carrinho.itens;
-  readonly totalGarrafas = this.carrinho.totalGarrafas;
-  readonly subtotal = this.carrinho.subtotal;
-  readonly cupomAplicado = this.carrinho.cupomAplicado;
-  readonly percentualCupom = this.carrinho.percentualCupom;
-  readonly desconto = this.carrinho.desconto;
-  readonly frete = this.carrinho.frete;
-  readonly total = this.carrinho.total;
-  readonly maiorDeIdade = this.carrinho.maiorDeIdade;
-  readonly mensagemCupom = signal('');
-  readonly faltaParaFreteGratis = computed(() => Math.max(0, this.carrinho.freteGratisAcima - this.carrinho.valorComDesconto()));
-  readonly progressoFrete = computed(() => Math.min(100, this.carrinho.valorComDesconto() / this.carrinho.freteGratisAcima * 100));
+  carrinho = carrinho;
+  private router = inject(Router);
+  mensagemCupom = '';
+
+  faltaParaFreteGratis(): number {
+    return Math.max(0, this.carrinho.freteGratisAcima - this.carrinho.valorComDesconto());
+  }
+
+  progressoFrete(): number {
+    return Math.min(100, this.carrinho.valorComDesconto() / this.carrinho.freteGratisAcima * 100);
+  }
 
   moeda(valor: number): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -32,18 +30,22 @@ export class CarrinhoComponent {
 
   alterarQuantidade(id: number, delta: number): void { this.carrinho.alterarQuantidade(id, delta); }
   remover(id: number): void { this.carrinho.remover(id); }
-  limpar(): void { this.carrinho.limpar(); this.mensagemCupom.set(''); }
+  limpar(): void { this.carrinho.limpar(); this.mensagemCupom = ''; }
 
   aplicarCupom(codigo: string): void {
-    this.mensagemCupom.set(this.carrinho.aplicarCupom(codigo) ? '' : codigo.trim() ? 'Cupom inválido ou expirado.' : 'Digite o código do cupom.');
+    if (this.carrinho.aplicarCupom(codigo)) {
+      this.mensagemCupom = '';
+    } else {
+      this.mensagemCupom = codigo.trim() ? 'Cupom inválido ou expirado.' : 'Digite o código do cupom.';
+    }
   }
 
   removerCupom(): void {
-    this.cupomAplicado.set(null);
-    this.mensagemCupom.set('');
+    this.carrinho.cupomAplicado = null;
+    this.mensagemCupom = '';
   }
 
   finalizar(): void {
-    if (this.maiorDeIdade() && this.itens().length) this.router.navigate(['/checkout']);
+    if (this.carrinho.maiorDeIdade && this.carrinho.itens.length > 0) this.router.navigate(['/checkout']);
   }
 }

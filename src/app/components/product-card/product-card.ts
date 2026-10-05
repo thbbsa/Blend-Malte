@@ -1,15 +1,16 @@
-import { Component, input, inject } from '@angular/core';
-import { CarrinhoService } from '../../services/carrinho.service';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { carrinho } from '../../models/loja';
 import { Produto } from '../../models/produto';
 import { CurrencyPipe } from '@angular/common';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Default,
   imports: [CurrencyPipe],
   selector: 'app-product-card',
   styleUrl: './product-card.css',
   templateUrl: './product-card.html',
 })
 export class ProductCard {
-  readonly carrinho = inject(CarrinhoService);
-  produto = input.required<Produto>();
+  carrinho = carrinho;
+  @Input({ required: true }) produto!: Produto;
 }

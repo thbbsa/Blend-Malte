@@ -1,75 +1,35 @@
-import { Component, computed, inject } from '@angular/core';
-import { Produto } from '../../models/produto';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { CATALOGO } from '../../models/catalogo';
 import { ProductCard } from '../../components/product-card/product-card';
 import { HeaderComponent } from '../../components/header/header.component';
-
-import { ActivatedRoute } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 import { Footer } from '../../components/footer/footer';
-
 
 @Component({
   selector: 'app-produtos',
   imports: [HeaderComponent, Footer, ProductCard],
+  changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './produtos.html',
   styleUrl: './produtos.css'
 })
 export class Produtos {
-  produtos: Produto[] = [
-    {
-      id: 1,
-      nome: 'Vinho Tinto Reservado',
-      categoria: 'Vinhos',
-      preco: 49.90,
-      estoque: 20,
-      imagem: 'imgs/produtos/vinho.png',
-      descricao: 'Vinho tinto nacional de sabor marcante.'
-    },
-    {
-      id: 2,
-      nome: 'Cerveja Black Princess',
-      categoria: 'Cervejas',
-      preco: 6.99,
-      estoque: 50,
-      imagem: 'imgs/produtos/cerveja.png',
-      descricao: 'Cerveja premium de sabor equilibrado.'
-    },
-    {
-      id: 3,
-      nome: 'Whisky Black Label',
-      categoria: 'Destilados',
-      preco: 169.90,
-      estoque: 10,
-      imagem: 'imgs/produtos/whisky.png',
-      descricao: 'Whisky Black Label envelhecido por 12 anos.'
-    }
-  ];
-
-  private rota = inject(ActivatedRoute);
-
-  categoria = toSignal(
-    this.rota.paramMap.pipe(map(p => p.get('categoria'))),
-    { initialValue: null }
-  );
-
-  busca = toSignal(
-    this.rota.queryParamMap.pipe(map(p => p.get('busca'))),
-    { initialValue: null }
-  );
+  produtos = CATALOGO;
+  private router = inject(Router);
 
   private limpar(texto: string): string {
     return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   }
 
-  produtosFiltrados = computed(() => {
-    const cat = this.categoria();
-    const termo = this.busca();
-
-    return this.produtos.filter(p => {
-      const daCategoria = !cat || this.limpar(p.categoria) === this.limpar(cat);
-      const doTermo = !termo || this.limpar(p.nome + ' ' + p.descricao).includes(this.limpar(termo));
+  produtosFiltrados() {
+    // Lê a URL atual a cada atualização da tela, inclusive ao mudar de categoria.
+    const url = this.router.parseUrl(this.router.url);
+    const segmentos = url.root.children['primary']?.segments;
+    const categoria = segmentos && segmentos.length > 1 ? segmentos[1].path : '';
+    const busca = url.queryParams['busca'] || '';
+    return this.produtos.filter(produto => {
+      const daCategoria = !categoria || this.limpar(produto.categoria) === this.limpar(categoria);
+      const doTermo = !busca || this.limpar(produto.nome + ' ' + produto.descricao).includes(this.limpar(busca));
       return daCategoria && doTermo;
     });
-  });
+  }
 }

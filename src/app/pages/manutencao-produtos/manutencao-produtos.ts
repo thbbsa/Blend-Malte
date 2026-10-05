@@ -91,7 +91,9 @@ export class ManutencaoProdutos {
       this.exibirFeedback(`Produto "${novoItem.nome}" cadastrado com sucesso!`);
     }
 
+    const feedback = this.mensagemFeedback;
     this.novo();
+    this.mensagemFeedback = feedback;
   }
 
   // Cancelar edição

@@ -1,0 +1,7 @@
+:host { display: block; background: #f6f2e9; color: #1f1610; }
+.conta { max-width: 520px; margin: 40px auto; padding: 28px; background: #fffdf8; border: 1px solid #e3dccb; border-radius: 12px; }
+label { display: block; margin: 16px 0; }
+input { display: block; box-sizing: border-box; width: 100%; padding: 12px; margin-top: 6px; border: 1px solid #c8beaa; border-radius: 6px; font: inherit; }
+button { display: block; margin: 20px 0; padding: 12px 20px; background: #8a5f12; color: white; border: 0; border-radius: 6px; font: inherit; cursor: pointer; }
+a { color: #8a5f12; }
+[role=alert] { color: #b3261e; }
