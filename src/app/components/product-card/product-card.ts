@@ -1,4 +1,5 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, inject } from '@angular/core';
+import { CarrinhoService } from '../../services/carrinho.service';
 import { Produto } from '../../models/produto';
 import { CurrencyPipe } from '@angular/common';
 
@@ -9,5 +10,6 @@ import { CurrencyPipe } from '@angular/common';
   templateUrl: './product-card.html',
 })
 export class ProductCard {
-  produto = input.required<Produto>(); 
+  readonly carrinho = inject(CarrinhoService);
+  produto = input.required<Produto>();
 }

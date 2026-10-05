@@ -5,11 +5,14 @@ import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { ManutencaoProdutos } from './pages/manutencao-produtos/manutencao-produtos';
 import { CadastroCliente } from './pages/cadastro-cliente/cadastro-cliente';
 
+import { Checkout } from './pages/checkout/checkout';
+
 export const routes: Routes = [
   {
     path: '',
     component: Home,
   },
+  { path: 'checkout', component: Checkout },
   {
     path: 'carrinho',
     component: CarrinhoComponent,
@@ -31,4 +34,3 @@ export const routes: Routes = [
     component: CadastroCliente,
   },
 ];
-
