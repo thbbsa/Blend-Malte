@@ -1,1 +1,52 @@
-<p>login works!</p>
+<app-header></app-header>
+
+<main>
+    <section class="login-card">
+
+        @if (sucesso()) {
+            <div class="concluido" role="status">
+                <i class="bi bi-check-circle"></i>
+                <h1>Login concluído</h1>
+                <p class="sub">{{ sucesso() }}</p>
+                <a class="voltar" routerLink="/">Ir para a home</a>
+            </div>
+        } @else {
+            <h1>Entrar na conta</h1>
+
+            <p class="sub">Use seu e-mail e senha para acessar o site</p>
+
+            <form novalidate (submit)="entrar($event, email.value, senha.value)">
+                <label for="email">E-mail</label>
+                <input
+                    #email
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    placeholder="cliente@email.com"
+                >
+
+                <label for="senha">Senha</label>
+                <input
+                    #senha
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    autocomplete="current-password"
+                >
+
+                @if (erro()) {
+                    <p class="erro" role="alert">{{ erro() }}</p>
+                }
+
+                <button type="submit">Entrar</button>
+            </form>
+
+            <p class="links">
+                <a routerLink="/esqueci-senha">Esqueci a senha</a>
+                <a routerLink="/cadastro-cliente">Criar conta</a>
+            </p>
+        }
+
+    </section>
+</main>
