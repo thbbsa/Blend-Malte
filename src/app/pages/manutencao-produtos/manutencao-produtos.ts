@@ -23,6 +23,9 @@ export class ManutencaoProdutos {
     { id: 2, nome: 'Cerveja Black Princess', qtd: 50, preco: 6.99 },
     { id: 3, nome: 'Whisky Black Label', qtd: 10, preco: 169.90 },
     { id: 4, nome: 'Gin Tanqueray London Dry', qtd: 15, preco: 119.90 },
+    { id: 5, nome: 'Vodka Grey Goose', qtd: 40, preco: 248.90 },
+    { id: 6, nome: 'Vinho Pergola', qtd: 15, preco: 119.90 },
+    { id: 7, nome: 'Cerveja Corona Extra', qtd: 30, preco: 9.99 },
   ];
 
   // Formulário do produto

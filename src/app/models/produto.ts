@@ -8,6 +8,7 @@ export interface Produto {
   preco: number;
   estoque: number;
   descricao: string;
+  imagem?: string;
 }
 
 export const CATEGORIAS = [

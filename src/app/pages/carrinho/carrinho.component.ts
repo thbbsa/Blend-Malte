@@ -5,9 +5,10 @@ import { Footer } from '../../components/footer/footer';
 import { carrinho } from '../../models/loja';
 
 @Component({
-  imports: [HeaderComponent, Footer, RouterLink],
   changeDetection: ChangeDetectionStrategy.Default,
   selector: 'app-carrinho',
+  standalone: true,
+  imports: [HeaderComponent, Footer, RouterLink],
   styleUrl: './carrinho.component.css',
   templateUrl: './carrinho.component.html',
 })
@@ -21,16 +22,27 @@ export class CarrinhoComponent {
   }
 
   progressoFrete(): number {
-    return Math.min(100, this.carrinho.valorComDesconto() / this.carrinho.freteGratisAcima * 100);
+    return Math.min(100, (this.carrinho.valorComDesconto() / this.carrinho.freteGratisAcima) * 100);
   }
 
   moeda(valor: number): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
-  alterarQuantidade(id: number, delta: number): void { this.carrinho.alterarQuantidade(id, delta); }
-  remover(id: number): void { this.carrinho.remover(id); }
-  limpar(): void { this.carrinho.limpar(); this.mensagemCupom = ''; }
+  alterarQuantidade(id: number | undefined, delta: number): void {
+    if (id === undefined) return;
+    this.carrinho.alterarQuantidade(id, delta);
+  }
+
+  remover(id: number | undefined): void {
+    if (id === undefined) return;
+    this.carrinho.remover(id);
+  }
+
+  limpar(): void {
+    this.carrinho.limpar();
+    this.mensagemCupom = '';
+  }
 
   aplicarCupom(codigo: string): void {
     if (this.carrinho.aplicarCupom(codigo)) {
@@ -46,6 +58,8 @@ export class CarrinhoComponent {
   }
 
   finalizar(): void {
-    if (this.carrinho.maiorDeIdade && this.carrinho.itens.length > 0) this.router.navigate(['/checkout']);
+    if (this.carrinho.maiorDeIdade && this.carrinho.itens.length > 0) {
+      this.router.navigate(['/checkout']);
+    }
   }
 }

@@ -1,6 +1,6 @@
 <article class="card-produto">
     <div class="foto">
-        <img [src]="produto.imagem" [alt]="produto.nome" loading="lazy">
+        <img [src]="produto.imagem || 'logo.png'" [alt]="produto.nome" loading="lazy">
     </div>
 
     <span class="tag">{{ produto.categoria }}</span>

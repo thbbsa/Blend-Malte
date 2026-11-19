@@ -8,23 +8,22 @@
       </p>
     }
   </header>
-
-  @if (!carrinho.itens.length) {
+@if (!carrinho.itens.length) {
     <div class="aviso-central">
-      <h2>Nenhuma garrafa por aqui</h2>
+      <h2>Nenhum produto por aqui</h2>
       <p>Escolha rótulos no catálogo para começar o pedido.</p>
       <a class="btn-secundario" routerLink="/produtos">Ver produtos</a>
     </div>
-  } @else {
+  }
+   @else {
     <div class="layout">
       <ul class="lista">
-        @for (item of carrinho.itens; track item.id) {
+        @for (item of carrinho.itens; track item.id ?? $index) {
           <li class="item">
-            <img class="foto" [src]="item.imagem" [alt]="item.nome" />
+            <img class="foto" [src]="item.imagem || 'logo.png'" [alt]="item.nome" />
 
             <div class="detalhes">
               <h2>{{ item.nome }}</h2>
-
 
               <p class="etiquetas">
                 <span>{{ item.categoria }}</span>
@@ -32,9 +31,19 @@
             </div>
 
             <div class="quantidade" role="group" [attr.aria-label]="'Quantidade de ' + item.nome">
-              <button type="button" (click)="alterarQuantidade(item.id, -1)" [disabled]="item.quantidade <= 1" aria-label="Diminuir quantidade">−</button>
+              <button
+                type="button"
+                (click)="alterarQuantidade(item.id, -1)"
+                [disabled]="item.quantidade <= 1"
+                aria-label="Diminuir quantidade"
+              >−</button>
               <output>{{ item.quantidade }}</output>
-              <button type="button" (click)="alterarQuantidade(item.id, 1)" [disabled]="item.quantidade >= carrinho.limite(item)" aria-label="Aumentar quantidade">+</button>
+              <button
+                type="button"
+                (click)="alterarQuantidade(item.id, 1)"
+                [disabled]="item.quantidade >= carrinho.limite(item)"
+                aria-label="Aumentar quantidade"
+              >+</button>
             </div>
 
             <div class="valores">
@@ -78,8 +87,14 @@
           } @else {
             <label for="cupom">Cupom de desconto</label>
             <div class="cupom-campo">
-              <input id="cupom" #campoCupom type="text" placeholder="Código" autocomplete="off"
-                     (keydown.enter)="aplicarCupom(campoCupom.value)" />
+              <input
+                id="cupom"
+                #campoCupom
+                type="text"
+                placeholder="Código"
+                autocomplete="off"
+                (keydown.enter)="aplicarCupom(campoCupom.value)"
+              />
               <button type="button" class="btn-secundario" (click)="aplicarCupom(campoCupom.value)">Aplicar</button>
             </div>
             @if (mensagemCupom) {
@@ -89,8 +104,11 @@
         </div>
 
         <label class="idade">
-          <input type="checkbox" [checked]="carrinho.maiorDeIdade"
-                 (change)="carrinho.maiorDeIdade = $any($event.target).checked" />
+          <input
+            type="checkbox"
+            [checked]="carrinho.maiorDeIdade"
+            (change)="carrinho.maiorDeIdade = $any($event.target).checked"
+          />
           <span>Confirmo que tenho 18 anos ou mais.</span>
         </label>
 
