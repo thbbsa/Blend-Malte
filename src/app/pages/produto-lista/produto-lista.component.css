@@ -1,0 +1,82 @@
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  margin: 0 0 0.25rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+p {
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+.alerta {
+  background: #3b1c1c;
+  border: 1px solid #7a2e2e;
+  color: #f1b5b5;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.vazio {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.tabela-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--superficie);
+}
+
+th,
+td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--borda);
+  white-space: nowrap;
+}
+
+th {
+  color: var(--dourado);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+tbody tr:hover {
+  background: rgba(201, 162, 77, 0.06);
+}
+
+td.nome {
+  font-weight: 500;
+}
+
+.acoes {
+  text-align: right;
+}
+
+.acoes .btn + .btn {
+  margin-left: 0.4rem;
+}

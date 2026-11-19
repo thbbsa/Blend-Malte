@@ -1,0 +1,51 @@
+<section class="cabecalho">
+  <div>
+    <h1>Produtos</h1>
+    <p>Gerencie o catálogo de whiskies da Blend &amp; Malte.</p>
+  </div>
+  <a class="btn btn-primario" routerLink="/produtos/novo">+ Novo produto</a>
+</section>
+
+@if (erro) {
+  <div class="alerta">{{ erro }}</div>
+}
+
+@if (carregando) {
+  <p class="vazio">Carregando...</p>
+} @else if (produtos.length === 0 && !erro) {
+  <p class="vazio">Nenhum produto cadastrado ainda.</p>
+} @else if (produtos.length > 0) {
+  <div class="tabela-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Categoria</th>
+          <th>Origem</th>
+          <th>Teor</th>
+          <th>Volume</th>
+          <th>Preço</th>
+          <th>Estoque</th>
+          <th class="acoes">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of produtos; track p.id) {
+          <tr>
+            <td class="nome">{{ p.nome }}</td>
+            <td>{{ p.categoria }}</td>
+            <td>{{ p.origem }}</td>
+            <td>{{ p.teorAlcoolico }}%</td>
+            <td>{{ p.volumeMl }} ml</td>
+            <td>{{ p.preco | currency: 'BRL' }}</td>
+            <td>{{ p.estoque }}</td>
+            <td class="acoes">
+              <a class="btn btn-secundario" [routerLink]="['/produtos/editar', p.id]">Editar</a>
+              <button class="btn btn-perigo" type="button" (click)="excluir(p)">Excluir</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

@@ -1,0 +1,76 @@
+h1 {
+  margin: 0 0 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.alerta {
+  background: #3b1c1c;
+  border: 1px solid #7a2e2e;
+  color: #f1b5b5;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem 1.25rem;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.largo {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dourado);
+}
+
+input,
+select,
+textarea {
+  background: var(--fundo);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  padding: 0.65rem 0.8rem;
+  font: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--dourado);
+}
+
+small {
+  color: #f1b5b5;
+}
+
+.botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+@media (max-width: 650px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+}
