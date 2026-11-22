@@ -1,14 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
-
-export interface ProdutoItem {
-  id: number;
-  nome: string;
-  qtd: number;
-  preco: number;
-}
+import { Produto } from '../../models/produto';
+import { ProdutoService } from '../../services/produto.service';
+import { mensagemErro } from '../../services/erro-api';
 
 @Component({
   selector: 'app-manutencao-produtos',
@@ -17,111 +13,132 @@ export interface ProdutoItem {
   styleUrl: './manutencao-produtos.css',
 })
 export class ManutencaoProdutos {
-  // Lista inicial de produtos
-  produtos: ProdutoItem[] = [
-    { id: 1, nome: 'Vinho Tinto Reservado', qtd: 20, preco: 49.90 },
-    { id: 2, nome: 'Cerveja Black Princess', qtd: 50, preco: 6.99 },
-    { id: 3, nome: 'Whisky Black Label', qtd: 10, preco: 169.90 },
-    { id: 4, nome: 'Gin Tanqueray London Dry', qtd: 15, preco: 119.90 },
-  ];
-
-  // Formulário do produto
-  produtoForm: ProdutoItem = {
-    id: 0,
-    nome: '',
-    qtd: 1,
-    preco: 0,
-  };
-
-  // Controle de estado
+  produtos: Produto[] = [];
+  produtoForm: Produto = new Produto(0, '', 'Vinhos', 0, 1, '', '');
   modoEdicao = false;
   mensagemFeedback = '';
+  carregando = false;
+  erro = '';
+  lendoImagem = false;
+  private readonly tamanhoMaximoImagem = 2 * 1024 * 1024;
+  private detector = inject(ChangeDetectorRef);
 
-  // Iniciar cadastro de novo produto
-  novo(): void {
-    this.produtoForm = {
-      id: 0,
-      nome: '',
-      qtd: 1,
-      preco: 0,
-    };
-    this.modoEdicao = false;
-    this.mensagemFeedback = '';
+  constructor(private produtosApi: ProdutoService) { this.carregar(); }
+
+  carregar(): void {
+    this.carregando = true;
+    this.detector.markForCheck();
+    this.produtosApi.listar().subscribe({
+      next: produtos => {
+        this.produtos = produtos;
+        this.carregando = false;
+        this.detector.markForCheck();
+      },
+      error: error => {
+        this.erro = mensagemErro(error, 'Não foi possível consultar produtos.');
+        this.carregando = false;
+        this.detector.markForCheck();
+      },
+    });
   }
 
-  // Carregar produto para edição
-  editar(produto: ProdutoItem): void {
+  novo(): void {
+    this.produtoForm = new Produto(0, '', 'Vinhos', 0, 1, '', '');
+    this.modoEdicao = false;
+    this.mensagemFeedback = '';
+    this.detector.markForCheck();
+  }
+
+  editar(produto: Produto): void {
     this.produtoForm = { ...produto };
     this.modoEdicao = true;
     this.mensagemFeedback = '';
+    this.detector.markForCheck();
   }
 
-  // Salvar (Criar ou Atualizar)
+  selecionarImagem(evento: Event): void {
+    const campo = evento.target as HTMLInputElement;
+    const arquivo = campo.files?.[0];
+    if (!arquivo) return;
+
+    if (!arquivo.type.startsWith('image/')) {
+      this.erro = 'Selecione um arquivo de imagem válido.';
+      campo.value = '';
+      return;
+    }
+    if (arquivo.size > this.tamanhoMaximoImagem) {
+      this.erro = 'A imagem deve ter no máximo 2 MB.';
+      campo.value = '';
+      return;
+    }
+
+    const leitor = new FileReader();
+    this.lendoImagem = true;
+    this.erro = '';
+    leitor.onload = () => {
+      if (typeof leitor.result === 'string') {
+        this.produtoForm.imagem = leitor.result;
+        this.erro = '';
+      }
+      this.lendoImagem = false;
+      this.detector.markForCheck();
+    };
+    leitor.onerror = () => {
+      this.erro = 'Não foi possível carregar essa imagem.';
+      this.lendoImagem = false;
+      this.detector.markForCheck();
+    };
+    leitor.readAsDataURL(arquivo);
+  }
+
   salvar(): void {
-    if (!this.produtoForm.nome.trim()) {
-      alert('Por favor, informe o nome do produto.');
+    if (this.lendoImagem) {
+      this.erro = 'Aguarde o carregamento da foto antes de cadastrar.';
       return;
     }
-
-    if (this.produtoForm.qtd < 0) {
-      alert('A quantidade não pode ser negativa.');
+    if (!this.produtoForm.nome.trim() || !this.produtoForm.descricao.trim() ||
+      !this.produtoForm.categoria || !this.produtoForm.imagem.trim() ||
+      this.produtoForm.estoque < 0 || this.produtoForm.preco <= 0) {
+      this.erro = 'Preencha os dados, escolha uma foto ou informe seu caminho e informe preço e estoque válidos.';
       return;
     }
-
-    if (this.produtoForm.preco <= 0) {
-      alert('Informe um preço válido maior que zero.');
-      return;
-    }
-
-    if (this.modoEdicao) {
-      // Atualizar existente
-      const index = this.produtos.findIndex((p) => p.id === this.produtoForm.id);
-      if (index !== -1) {
-        this.produtos[index] = { ...this.produtoForm };
-        this.exibirFeedback(`Produto "${this.produtoForm.nome}" atualizado com sucesso!`);
-      }
-    } else {
-      // Inserir novo com ID incremental
-      const novoId = this.produtos.length > 0 ? Math.max(...this.produtos.map((p) => p.id)) + 1 : 1;
-      const novoItem: ProdutoItem = {
-        ...this.produtoForm,
-        id: novoId,
-      };
-      this.produtos.push(novoItem);
-      this.exibirFeedback(`Produto "${novoItem.nome}" cadastrado com sucesso!`);
-    }
-
-    const feedback = this.mensagemFeedback;
-    this.novo();
-    this.mensagemFeedback = feedback;
+    const edicao = this.modoEdicao;
+    const pedido = edicao
+      ? this.produtosApi.atualizar(this.produtoForm)
+      : this.produtosApi.criar({
+        nome: this.produtoForm.nome.trim(), categoria: this.produtoForm.categoria,
+        preco: this.produtoForm.preco, estoque: this.produtoForm.estoque,
+        imagem: this.produtoForm.imagem.trim(), descricao: this.produtoForm.descricao.trim(),
+      });
+    pedido.subscribe({
+      next: produto => {
+        this.mensagemFeedback = `Produto "${produto.nome}" ${edicao ? 'atualizado' : 'cadastrado'} na API.`;
+        this.erro = '';
+        this.novo();
+        this.carregar();
+        this.detector.markForCheck();
+      },
+      error: error => {
+        this.erro = mensagemErro(error, 'Não foi possível salvar o produto.');
+        this.detector.markForCheck();
+      },
+    });
   }
 
-  // Cancelar edição
-  cancelar(): void {
-    this.novo();
-  }
+  cancelar(): void { this.novo(); }
 
-  // Excluir produto
-  excluir(produto: ProdutoItem): void {
-    const confirmar = confirm(`Deseja realmente remover o produto "${produto.nome}"?`);
-    if (!confirmar) return;
-
-    this.produtos = this.produtos.filter((p) => p.id !== produto.id);
-
-    // Se o item excluído estava sendo editado, reseta o form
-    if (this.produtoForm.id === produto.id) {
-      this.novo();
-    }
-
-    this.exibirFeedback(`Produto "${produto.nome}" removido com sucesso.`);
-  }
-
-  private exibirFeedback(msg: string): void {
-    this.mensagemFeedback = msg;
-    setTimeout(() => {
-      if (this.mensagemFeedback === msg) {
-        this.mensagemFeedback = '';
-      }
-    }, 3500);
+  excluir(produto: Produto): void {
+    if (!confirm(`Deseja realmente remover "${produto.nome}"?`)) return;
+    this.produtosApi.excluir(produto.id).subscribe({
+      next: () => {
+        this.produtos = this.produtos.filter(item => item.id !== produto.id);
+        this.mensagemFeedback = `Produto "${produto.nome}" removido da API.`;
+        this.detector.markForCheck();
+      },
+      error: error => {
+        this.erro = mensagemErro(error, 'Não foi possível remover o produto.');
+        this.detector.markForCheck();
+      },
+    });
   }
 }

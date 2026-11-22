@@ -1,51 +1,59 @@
-<app-header />
-<div class="cadastro-container">
-  
-  <div class="form-card">
-    <h2>Criar sua Conta</h2>
-    <p>Preencha os campos abaixo para se cadastrar na Blend & Malte</p>
+<app-header></app-header>
 
-    <p>Cadastro demonstrativo: os dados não serão salvos.</p><a routerLink="/login">Voltar para entrar</a><form #form="ngForm" (ngSubmit)="cadastrar(form)">
-      
-      <div class="form-group">
-        <label for="nome">Nome Completo *</label>
-        <input type="text" id="nome" name="nome" [(ngModel)]="cliente.nome" placeholder="Digite seu nome completo" required>
+<main class="cadastro-container">
+  <section class="form-card" aria-labelledby="titulo-cadastro">
+    <div class="form-intro">
+      <span class="etiqueta">Blend &amp; Malte</span>
+      <h1 id="titulo-cadastro">Criar sua conta</h1>
+      <p>Preencha seus dados para fazer parte da nossa adega.</p>
+      <a class="link-entrar" routerLink="/login">Já tem uma conta? <strong>Entrar</strong></a>
+    </div>
+
+    @if (erro) { <p class="mensagem erro" role="alert">{{ erro }}</p> }
+    @if (mensagem) { <p class="mensagem sucesso" role="status">{{ mensagem }}</p> }
+
+    <form #form="ngForm" (ngSubmit)="cadastrar(form)" class="form-cadastro">
+      <div class="form-group campo-nome">
+        <label for="nome">Nome completo <span>*</span></label>
+        <input type="text" id="nome" name="nome" [(ngModel)]="cliente.nome" placeholder="Digite seu nome completo" autocomplete="name" required>
       </div>
 
       <div class="form-group">
-        <label for="cpf">CPF *</label>
-        <input type="text" id="cpf" name="cpf" [(ngModel)]="cliente.cpf" placeholder="000.000.000-00" required>
+        <label for="cpf">CPF <span>*</span></label>
+        <input type="text" id="cpf" name="cpf" [(ngModel)]="cliente.cpf" placeholder="000.000.000-00" autocomplete="off" required>
       </div>
 
       <div class="form-group">
-        <label for="usuario">Nome de Usuário *</label>
-        <input type="text" id="usuario" name="usuario" [(ngModel)]="cliente.usuario" placeholder="Digite seu nome de usuário" required>
+        <label for="usuario">Nome de usuário <span>*</span></label>
+        <input type="text" id="usuario" name="usuario" [(ngModel)]="cliente.usuario" placeholder="Escolha seu usuário" autocomplete="username" required>
       </div>
 
       <div class="form-group">
-        <label for="email">E-mail *</label>
-        <input type="email" email id="email" name="email" [(ngModel)]="cliente.email" placeholder="seuemail@exemplo.com" required>
+        <label for="email">E-mail <span>*</span></label>
+        <input type="email" id="email" name="email" [(ngModel)]="cliente.email" placeholder="seuemail@exemplo.com" autocomplete="email" email required>
       </div>
 
       <div class="form-group">
-        <label for="telefone">Telefone *</label>
-        <input type="tel" id="telefone" name="telefone" [(ngModel)]="cliente.telefone" placeholder="(00) 00000-0000" required>
+        <label for="telefone">Telefone <span>*</span></label>
+        <input type="tel" id="telefone" name="telefone" [(ngModel)]="cliente.telefone" placeholder="(00) 00000-0000" autocomplete="tel" required>
       </div>
 
       <div class="form-group">
-        <label for="senha">Senha *</label>
-        <input type="password" id="senha" name="senha" [(ngModel)]="cliente.senha" placeholder="Digite sua senha" required>
+        <label for="senha">Senha <span>*</span></label>
+        <input type="password" id="senha" name="senha" [(ngModel)]="cliente.senha" placeholder="Crie uma senha" autocomplete="new-password" required>
       </div>
 
       <div class="form-group">
-        <label for="confirmarSenha">Confirmação de Senha *</label>
-        <input type="password" id="confirmarSenha" name="confirmarSenha" [(ngModel)]="cliente.confirmarSenha" placeholder="Confirme sua senha" required>
+        <label for="confirmarSenha">Confirmar senha <span>*</span></label>
+        <input type="password" id="confirmarSenha" name="confirmarSenha" [(ngModel)]="cliente.confirmarSenha" placeholder="Digite a senha novamente" autocomplete="new-password" required>
       </div>
 
-      @if (mensagem) { <p role="status">{{ mensagem }}</p> }
-      <button type="submit" class="btn-cadastrar">Cadastrar</button>
+      <p class="nota-api">Seus dados serão registrados na API de demonstração.</p>
+      <button type="submit" class="btn-cadastrar" [disabled]="carregando">
+        {{ carregando ? 'Enviando cadastro...' : 'Criar conta' }}
+      </button>
     </form>
-  </div>
+  </section>
+</main>
 
-</div>
-<app-footer />
+<app-footer></app-footer>

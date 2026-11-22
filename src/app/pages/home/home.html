@@ -41,9 +41,13 @@
         <a routerLink="/produtos">Ver todos <i class="bi bi-arrow-right"></i></a>
     </div>
 
+    @if (erro) { <p role="alert">{{ erro }}</p> }
+    @if (carregando) { <p class="estado-destaques" role="status">Carregando produtos...</p> }
     <div class="lista-produtos">
-        @for (p of produtos; track p.id) {
+        @for (p of produtosDestaque; track p.id) {
         <app-product-card [produto]="p"></app-product-card>
+        } @empty {
+        @if (!carregando && !erro) { <p class="estado-destaques">Nenhum produto disponível no momento.</p> }
         }
     </div>
 </section>
@@ -76,3 +80,4 @@
 </section>
 
 <app-footer></app-footer>
+

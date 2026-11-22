@@ -6,6 +6,7 @@ import { ManutencaoProdutos } from './pages/manutencao-produtos/manutencao-produ
 import { CadastroCliente } from './pages/cadastro-cliente/cadastro-cliente';
 import { Checkout } from './pages/checkout/checkout';
 import { Login } from './pages/login/login';
+import { adminGuard } from './admin.guard';
 
 
 export const routes: Routes = [
@@ -36,9 +37,11 @@ export const routes: Routes = [
   {
     path: 'manutencao-produtos',
     component: ManutencaoProdutos,
+    canActivate: [adminGuard],
   },
   {
     path: 'cadastro-cliente',
     component: CadastroCliente,
   },
 ];
+

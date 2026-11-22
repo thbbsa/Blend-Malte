@@ -1,0 +1,166 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Vinho Tinto Reservado",
+      "categoria": "Vinhos",
+      "preco": 49.9,
+      "estoque": 20,
+      "imagem": "imgs/produtos/vinho.png",
+      "descricao": "Vinho tinto nacional de sabor marcante."
+    },
+    {
+      "id": 2,
+      "nome": "Cerveja Black Princess",
+      "categoria": "Cervejas",
+      "preco": 6.99,
+      "estoque": 50,
+      "imagem": "imgs/produtos/cerveja.png",
+      "descricao": "Cerveja premium de sabor equilibrado."
+    },
+    {
+      "id": 3,
+      "nome": "Whisky Black Label",
+      "categoria": "Destilados",
+      "preco": 169.9,
+      "estoque": 10,
+      "imagem": "imgs/produtos/whisky.png",
+      "descricao": "Whisky Black Label envelhecido por 12 anos."
+    },
+    {
+      "id": 4,
+      "nome": "Vinho Rosé Suave",
+      "categoria": "Vinhos",
+      "preco": 59.9,
+      "estoque": 15,
+      "imagem": "imgs/produtos/vinho.png",
+      "descricao": "Vinho rosé leve e refrescante, ideal para dias especiais."
+    },
+    {
+      "id": 5,
+      "nome": "Vinho Cabernet Sauvignon",
+      "categoria": "Vinhos",
+      "preco": 79.9,
+      "estoque": 12,
+      "imagem": "imgs/produtos/vinho.png",
+      "descricao": "Vinho encorpado com notas de frutas vermelhas."
+    },
+    {
+      "id": 6,
+      "nome": "Cerveja Lager Puro Malte",
+      "categoria": "Cervejas",
+      "preco": 8.5,
+      "estoque": 36,
+      "imagem": "imgs/produtos/cerveja.png",
+      "descricao": "Lager puro malte leve e equilibrada."
+    },
+    {
+      "id": 7,
+      "nome": "Cerveja IPA Artesanal",
+      "categoria": "Cervejas",
+      "preco": 14.9,
+      "estoque": 24,
+      "imagem": "imgs/produtos/cerveja.png",
+      "descricao": "IPA artesanal com aroma cítrico e amargor marcante."
+    }
+  ],
+  "clientes": [
+    {
+      "id": 1,
+      "nome": "Cliente Demonstração",
+      "usuario": "cliente",
+      "email": "cliente@blendmalte.com",
+      "senha": "123456",
+      "cpf": "00000000000",
+      "telefone": "11999999999",
+      "papel": "cliente"
+    },
+    {
+      "id": 2,
+      "nome": "Administrador Demonstração",
+      "usuario": "admin",
+      "email": "admin@blendmalte.com",
+      "senha": "admin123",
+      "cpf": "11111111111",
+      "telefone": "11988888888",
+      "papel": "admin"
+    },
+    {
+      "nome": "diogo",
+      "cpf": "12342512343",
+      "usuario": "diogo",
+      "email": "diogo@mail.com",
+      "telefone": "11232342123",
+      "senha": "123456",
+      "papel": "cliente",
+      "id": 3
+    }
+  ],
+  "vendas": [
+    {
+      "cliente": {
+        "nome": "diogo",
+        "cpf": "12321312345",
+        "email": "diogo@mail.com",
+        "telefone": "11232425342"
+      },
+      "endereco": {
+        "cep": "12343123",
+        "endereco": "rua",
+        "numero": "56",
+        "complemento": "",
+        "bairro": "aa",
+        "cidade": "aaa",
+        "estado": "SP"
+      },
+      "itens": [
+        {
+          "id": 1,
+          "nome": "Vinho Tinto Reservado",
+          "categoria": "Vinhos",
+          "preco": 49.9,
+          "estoque": 20,
+          "imagem": "imgs/produtos/vinho.png",
+          "descricao": "Vinho tinto nacional de sabor marcante.",
+          "quantidade": 1
+        },
+        {
+          "id": 2,
+          "nome": "Cerveja Black Princess",
+          "categoria": "Cervejas",
+          "preco": 6.99,
+          "estoque": 50,
+          "imagem": "imgs/produtos/cerveja.png",
+          "descricao": "Cerveja premium de sabor equilibrado.",
+          "quantidade": 1
+        },
+        {
+          "id": 3,
+          "nome": "Whisky Black Label",
+          "categoria": "Destilados",
+          "preco": 169.9,
+          "estoque": 10,
+          "imagem": "imgs/produtos/whisky.png",
+          "descricao": "Whisky Black Label envelhecido por 12 anos.",
+          "quantidade": 1
+        },
+        {
+          "id": 4,
+          "nome": "Vinho Rosé Suave",
+          "categoria": "Vinhos",
+          "preco": 59.9,
+          "estoque": 15,
+          "imagem": "imgs/produtos/vinho.png",
+          "descricao": "Vinho rosé leve e refrescante, ideal para dias especiais.",
+          "quantidade": 1
+        }
+      ],
+      "subtotal": 286.69,
+      "desconto": 0,
+      "frete": 25,
+      "total": 311.69,
+      "data": "2026-11-22T20:54:31.301Z",
+      "id": 1
+    }
+  ]
+}

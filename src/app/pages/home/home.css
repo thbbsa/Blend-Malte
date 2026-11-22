@@ -173,6 +173,13 @@
   padding: 20px;
 }
 
+.estado-destaques {
+  width: 100%;
+  margin: 8px 0;
+  color: #5c4d3d;
+  text-align: center;
+}
+
 
 
 /* Benefícios */

@@ -1,0 +1,208 @@
+:host {
+  --cor-borgonha: #6e1735;
+  --cor-dourado: #dba12b;
+  --cor-preto: #241c17;
+  --cor-creme: #fff8ea;
+  --cor-cinza: #777;
+  display: block;
+  color: var(--cor-preto);
+  font-family: "DM Sans", Inter, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.cadastro-container {
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px 64px;
+  background: var(--cor-creme);
+}
+
+.form-card {
+  width: min(100%, 680px);
+  padding: 36px 40px;
+  border: 1px solid #e8e0d2;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(36, 28, 23, 0.08);
+}
+
+.form-intro {
+  margin-bottom: 26px;
+}
+
+.etiqueta {
+  color: #8f6317;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.form-intro h1 {
+  margin: 8px 0;
+  color: var(--cor-borgonha);
+  font: 700 2rem/1.2 "Bricolage Grotesque", Georgia, serif;
+}
+
+.form-intro p {
+  margin: 0 0 14px;
+  color: var(--cor-cinza);
+}
+
+.link-entrar {
+  color: var(--cor-borgonha);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.link-entrar strong {
+  color: #8f6317;
+}
+
+.link-entrar:hover,
+.link-entrar:hover strong {
+  color: var(--cor-dourado);
+  text-decoration: underline;
+}
+
+.form-cadastro {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 16px;
+}
+
+.form-group {
+  min-width: 0;
+}
+
+.campo-nome {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  color: #392b24;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.form-group label span {
+  color: var(--cor-borgonha);
+}
+
+.form-group input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #ded5c8;
+  border-radius: 7px;
+  background: #fffdf9;
+  color: var(--cor-preto);
+  font: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+  color: #a39a8e;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--cor-borgonha);
+  box-shadow: 0 0 0 3px rgba(219, 161, 43, 0.22);
+}
+
+.form-group input.ng-invalid.ng-touched {
+  border-color: #b33b50;
+}
+
+.nota-api,
+.mensagem,
+.btn-cadastrar {
+  grid-column: 1 / -1;
+}
+
+.nota-api {
+  margin: 0;
+  color: var(--cor-cinza);
+  font-size: 0.82rem;
+}
+
+.mensagem {
+  margin: 0 0 18px;
+  padding: 11px 13px;
+  border-radius: 7px;
+  font-size: 0.9rem;
+}
+
+.erro {
+  border: 1px solid #edc6cc;
+  background: #fff0f2;
+  color: #8d2339;
+}
+
+.sucesso {
+  border: 1px solid #c5dfca;
+  background: #eff8f0;
+  color: #28633a;
+}
+
+.btn-cadastrar {
+  min-height: 46px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--cor-borgonha);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-cadastrar:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #561029;
+}
+
+.btn-cadastrar:focus-visible {
+  outline: 3px solid rgba(219, 161, 43, 0.55);
+  outline-offset: 2px;
+}
+
+.btn-cadastrar:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+@media (max-width: 560px) {
+  .cadastro-container {
+    padding: 28px 14px 40px;
+  }
+
+  .form-card {
+    padding: 26px 20px;
+  }
+
+  .form-intro h1 {
+    font-size: 1.7rem;
+  }
+
+  .form-cadastro {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .campo-nome,
+  .nota-api,
+  .mensagem,
+  .btn-cadastrar {
+    grid-column: auto;
+  }
+}

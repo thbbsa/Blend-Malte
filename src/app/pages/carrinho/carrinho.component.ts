@@ -21,22 +21,31 @@ export class CarrinhoComponent {
   }
 
   progressoFrete(): number {
-    return Math.min(100, this.carrinho.valorComDesconto() / this.carrinho.freteGratisAcima * 100);
+    return Math.min(100, (this.carrinho.valorComDesconto() / this.carrinho.freteGratisAcima) * 100);
   }
 
   moeda(valor: number): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
-  alterarQuantidade(id: number, delta: number): void { this.carrinho.alterarQuantidade(id, delta); }
-  remover(id: number): void { this.carrinho.remover(id); }
-  limpar(): void { this.carrinho.limpar(); this.mensagemCupom = ''; }
+  alterarQuantidade(id: number, delta: number): void {
+    this.carrinho.alterarQuantidade(id, delta);
+  }
+  remover(id: number): void {
+    this.carrinho.remover(id);
+  }
+  limpar(): void {
+    this.carrinho.limpar();
+    this.mensagemCupom = '';
+  }
 
   aplicarCupom(codigo: string): void {
     if (this.carrinho.aplicarCupom(codigo)) {
       this.mensagemCupom = '';
     } else {
-      this.mensagemCupom = codigo.trim() ? 'Cupom inválido ou expirado.' : 'Digite o código do cupom.';
+      this.mensagemCupom = codigo.trim()
+        ? 'Cupom inválido ou expirado.'
+        : 'Digite o código do cupom.';
     }
   }
 
@@ -46,6 +55,7 @@ export class CarrinhoComponent {
   }
 
   finalizar(): void {
-    if (this.carrinho.maiorDeIdade && this.carrinho.itens.length > 0) this.router.navigate(['/checkout']);
+    if (this.carrinho.maiorDeIdade && this.carrinho.itens.length > 0)
+      this.router.navigate(['/checkout']);
   }
 }
