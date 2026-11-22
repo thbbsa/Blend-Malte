@@ -22,10 +22,26 @@ export class CadastroCliente {
   private detector = inject(ChangeDetectorRef);
   constructor(private clientesApi: ClienteService) {}
   cadastrar(form: NgForm): void {
-    if (form.invalid) { form.control.markAllAsTouched(); this.erro = 'Preencha todos os campos corretamente.'; return; }
-    if (this.cliente.senha !== this.cliente.confirmarSenha) { this.erro = 'As senhas não coincidem.'; return; }
-    this.carregando = true; this.mensagem = ''; this.erro = '';
-    this.clientesApi.cadastrar({ nome: this.cliente.nome.trim(), cpf: this.cliente.cpf.trim(), usuario: this.cliente.usuario.trim(), email: this.cliente.email.trim().toLowerCase(), telefone: this.cliente.telefone.trim(), senha: this.cliente.senha }).subscribe({
+    if (form.invalid) {
+      form.control.markAllAsTouched();
+      this.erro = 'Preencha todos os campos corretamente.';
+      return;
+    }
+    if (this.cliente.senha !== this.cliente.confirmarSenha) {
+      this.erro = 'As senhas não coincidem.';
+      return;
+    }
+    this.carregando = true;
+    this.mensagem = '';
+    this.erro = '';
+    this.clientesApi.cadastrar({
+      nome: this.cliente.nome.trim(),
+      cpf: this.cliente.cpf.trim(),
+      usuario: this.cliente.usuario.trim(),
+      email: this.cliente.email.trim().toLowerCase(),
+      telefone: this.cliente.telefone.trim(),
+      senha: this.cliente.senha,
+    }).subscribe({
       next: cliente => {
         form.resetForm();
         this.carregando = false;

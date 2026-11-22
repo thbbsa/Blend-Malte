@@ -32,14 +32,14 @@ export class Carrinho {
     }
   }
 
-  alterarQuantidade(id: number, delta: number): void {
+  alterarQuantidade(id: number| undefined, delta: number): void {
     const item = this.itens.find(item => item.id === id);
     if (item) {
       item.quantidade = Math.min(this.limite(item), Math.max(1, item.quantidade + delta));
     }
   }
 
-  remover(id: number): void {
+  remover(id: number| undefined): void {
     this.itens = this.itens.filter(item => item.id !== id);
     if (this.itens.length === 0) this.limpar();
   }

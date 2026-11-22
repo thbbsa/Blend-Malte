@@ -5,9 +5,10 @@ import { Footer } from '../../components/footer/footer';
 import { carrinho } from '../../models/loja';
 
 @Component({
-  imports: [HeaderComponent, Footer, RouterLink],
   changeDetection: ChangeDetectionStrategy.Default,
   selector: 'app-carrinho',
+  standalone: true,
+  imports: [HeaderComponent, Footer, RouterLink],
   styleUrl: './carrinho.component.css',
   templateUrl: './carrinho.component.html',
 })
@@ -21,6 +22,7 @@ export class CarrinhoComponent {
   }
 
   progressoFrete(): number {
+    return Math.min(100, (this.carrinho.valorComDesconto() / this.carrinho.freteGratisAcima) * 100);
     return Math.min(100, (this.carrinho.valorComDesconto() / this.carrinho.freteGratisAcima) * 100);
   }
 
