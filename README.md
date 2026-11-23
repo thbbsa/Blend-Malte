@@ -44,4 +44,4 @@ Angular, TypeScript, HTML, CSS, Angular Router, HttpClient, serviços Angular e 
 
 ## Escopo acadêmico e limitações
 
-A API JSON Server é um mock local, sem banco de dados de produção, autorização no servidor, hash de senha ou transações. Cadastro e vendas são persistidos no arquivo JSON local. O projeto não processa pagamentos. Para produção, é necessário um backend seguro com autenticação e autorização reais, além de uma hospedagem da API com CORS configurado para o domínio do Pages.
+A API JSON Server é um mock local, sem banco de dados de produção, autorização no servidor, hash de senha ou transações. Cadastro e vendas são persistidos no arquivo JSON local. O projeto não processa pagamentos. Para produção, é necessário um backend seguro com autenticação e autorização reais, além de uma hospedagem da API com CORS configurado para o domínio do Pages..
