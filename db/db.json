@@ -152,6 +152,41 @@
       "total": 311.69,
       "data": "2026-11-22T20:54:31.301Z",
       "id": "1"
+    },
+    {
+      "cliente": {
+        "nome": "Thiago Barbosa De Oliveira",
+        "cpf": "56570526847",
+        "email": "cliente@blendmalte.com",
+        "telefone": "1139828392744"
+      },
+      "endereco": {
+        "cep": "01310100",
+        "endereco": "2e2e2e2e2e2",
+        "numero": "e2e2e2e2e",
+        "complemento": "2e2e2e2e",
+        "bairro": "2e2e2e2",
+        "cidade": "e2e2e2e",
+        "estado": "SP"
+      },
+      "itens": [
+        {
+          "id": "4",
+          "nome": "Vinho Rosé Suave",
+          "categoria": "Vinhos",
+          "preco": 59.9,
+          "estoque": 15,
+          "imagem": "imgs/produtos/vinho.png",
+          "descricao": "Vinho rosé leve e refrescante, ideal para dias especiais.",
+          "quantidade": 1
+        }
+      ],
+      "subtotal": 59.9,
+      "desconto": 0,
+      "frete": 25,
+      "total": 84.9,
+      "data": "2026-11-23T14:19:25.656Z",
+      "id": "_RTImmq"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
